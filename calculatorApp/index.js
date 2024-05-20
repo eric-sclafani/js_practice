@@ -5,23 +5,41 @@ let currentEntry = ""; // the last item clicked
 let currentNumber = ""; // current consecutive number
 
 const displayCurrentOutputToUser = () => {
-    const output = document.querySelector("#output")
-    output.innerHTML = currentOutput;
-    
+    const output = document.querySelector("#output");
+    output.innerHTML = currentOutput; 
 }
 
-const isNumber = (string) => { return !isNaN(string)}
+const isNumber = (string) => { return !isNaN(string); }
 
-const isOperator = (string) => { return ["+", "-", "÷", "×"].includes(string)}
+const isOperator = (string) => { return ["+", "-", "÷", "×"].includes(string); }
+
+const isEquals = (string) => { return string == "="; }
 
 const updateOutput = (value) => {
 
     if (isNumber(value) || (isOperator(value) && !isOperator(previousEntry))){
-        currentOutput += value
-    }
-    
+        currentOutput += value;
+    } 
 }
 
+const applyOperator = (value1, value2, operator) => {
+    let result;
+    switch (operator) {
+        case "+":
+            result = value1 + value2;
+            break;
+        case "-":
+            result = value1 - value2;
+            break;
+        case "÷": 
+            result = value1 / value2;
+            break;
+        case "×":
+            result = value1 * value2;
+            break; 
+    }
+    return result;
+  }
 
 const buttonEventHandler = function() {
     const clickedValue = this.value
@@ -39,19 +57,19 @@ const buttonEventHandler = function() {
         // disable consecutive operators
         if (!isOperator(previousEntry)){
             currentNumber = "";
-            currentEntry = clickedValue
+            currentEntry = clickedValue;
             
         }
         
 
     }
 
-    console.log(`Previous: ${previousEntry}`)
-    console.log(`Current: ${currentEntry}`)
+    console.log(`Previous: ${previousEntry}`);
+    console.log(`Current: ${currentEntry}`);
     
     
     
-    displayCurrentOutputToUser()
+    displayCurrentOutputToUser();
 }
 
 
