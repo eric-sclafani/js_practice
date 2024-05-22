@@ -8,19 +8,29 @@
     border: solid;
 }
 
+#result,
 #output {
     font-weight: bold;
-    border-style: solid;
-    margin: 1em;
-    width: 18rem;
-    height: 3rem;
     font-size: 2em;
     text-align: end;
     padding-right: 5px;
     overflow-y: hidden;
     overflow-x: scroll;
     white-space: nowrap;
+    width: 18rem;
+    height: 3rem;
+}
 
+#output {
+    margin-top: 1em; 
+    margin-bottom:0.5rem;
+    border-style: solid;
+}
+
+
+#result {
+    background-color: lightgray;
+    border-style:groove
 }
 
 #zero {
@@ -38,12 +48,15 @@
     margin-bottom: 5px
 }
 
+#clear,
+#all-clear,
+#equals,
 .op-button,
 .num-button {
     width: 4.2rem;
     height: 4.2rem;
     border-radius: 50%;
     border: solid;
-    border-right-width: 0.5rem;
+    box-shadow: 5px 8px;
 }
 

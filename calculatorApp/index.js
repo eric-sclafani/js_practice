@@ -4,12 +4,38 @@ let previousEntry = ""; // the previous item clicked
 let currentEntry = ""; // the last item clicked
 let currentNumber = ""; // current consecutive number
 
+let result = "";
+let operandOne;
+let operandTwo;
+
+
+String.prototype.count=function(c) { 
+    var result = 0, i = 0;
+    for(i;i<this.length;i++){
+        if(this[i]==c)
+            result++;
+    };
+    return result;
+  };
+
+
 const displayCurrentOutputToUser = () => {
     const output = document.querySelector("#output");
     output.innerHTML = currentOutput; 
 }
 
-const isNumber = (string) => { return !isNaN(string); }
+const isValidDecimal = (string) => {
+    return string == "." && previousEntry.count(".") == 0;
+}
+
+const isNumber = (string) => { 
+    if (string && !isNaN(string)){
+        return true; 
+    } else if (isValidDecimal(string)){
+        return true;
+    }
+    
+}
 
 const isOperator = (string) => { return ["+", "-", "÷", "×"].includes(string); }
 
@@ -21,6 +47,8 @@ const updateOutput = (value) => {
         currentOutput += value;
     } 
 }
+
+const setOperandOne = () =>{ operandOne = previousEntry}
 
 const applyOperator = (value1, value2, operator) => {
     let result;
@@ -41,46 +69,49 @@ const applyOperator = (value1, value2, operator) => {
     return result;
   }
 
-const buttonEventHandler = function() {
+const getButtonValue = function() {
     const clickedValue = this.value
-    previousEntry = currentEntry
-    updateOutput(clickedValue)
+    previousEntry = currentEntry;
     
     if (isNumber(clickedValue)){
 
         currentNumber += clickedValue // user can enter consecutive numerals 
         currentEntry = currentNumber;
-        
+        updateOutput(clickedValue);
 
-    } else if (isOperator(clickedValue)){
-
-        // disable consecutive operators
-        if (!isOperator(previousEntry)){
-            currentNumber = "";
-            currentEntry = clickedValue;
+        if (operandOne){ // at this point, the user has clicked a number(s) and an operator
             
         }
-        
 
+    } else if (isOperator(clickedValue) && isNumber(previousEntry)){
+
+        if (!isOperator(previousEntry)){ // disable consecutive operators
+            currentNumber = "";
+            currentEntry = clickedValue;
+            updateOutput(clickedValue);
+
+            setOperandOne()
+        }
     }
 
     console.log(`Previous: ${previousEntry}`);
     console.log(`Current: ${currentEntry}`);
-    
-    
-    
+    console.log(`Operand one: ${operandOne}`)
+
     displayCurrentOutputToUser();
 }
 
 
 
-const setNumButtonEventHandlers = (buttonNodeList) => {
+
+
+const setButtonEventHandlers = (buttonNodeList, handler) => {
     for (const button of buttonNodeList){
-        button.addEventListener("click", buttonEventHandler);
+        button.addEventListener("click", handler);
     }
 }
 
 
-const calcButtons = document.querySelectorAll("button");;
-setNumButtonEventHandlers(calcButtons);
+const calcButtons = document.querySelectorAll("button");
+setButtonEventHandlers(calcButtons, getButtonValue);
 

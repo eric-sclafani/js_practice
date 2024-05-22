@@ -13,13 +13,16 @@
 
         <div id="calculator">
 
-            <div id="output"></div>
-
+            <div id="display">
+                <div id="output"></div>
+                <div id="result"></div>
+            </div>
+            
             <div id="calculator-buttons">
 
                 <div class="row">
-                    <button id="all-clear" class="op-button" value="AC">AC</button>
-                    <button id="clear" class="op-button" value="C">C</button>
+                    <button id="all-clear" value="AC">AC</button>
+                    <button id="clear" value="C">C</button>
                     <button class="op-button" value="+/-">+/-</button>
                     <button class="op-button" value="÷">÷</button>
                 </div>
@@ -48,7 +51,7 @@
                 <div class="row">
                     <button id="zero" class="num-button" value="0">0</button>
                     <button class="num-button" value=".">.</button>
-                    <button class="op-button" value="=">=</button>
+                    <button id="equals" value="=">=</button>
                 </div>
 
             </div>
