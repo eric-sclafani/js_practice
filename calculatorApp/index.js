@@ -1,13 +1,12 @@
 
-let currentOutput = ""; // current box output
-let previousEntry = ""; // the previous item clicked
-let currentEntry = ""; // the last item clicked
-let currentNumber = ""; // current consecutive number
+let 
+    currentOutput = "", // current box output
+    previousEntry = "", // the previous item clicked
+    currentEntry = "", // the last item clicked
+    currentNumber = "", // current consecutive number
+    currentOperator = ""; // current operator for computation
 
-let result = "";
-let operandOne;
-let operandTwo;
-
+let operand1, operand2, result;
 
 String.prototype.count=function(c) { 
     var result = 0, i = 0;
@@ -19,10 +18,11 @@ String.prototype.count=function(c) {
   };
 
 
-const displayCurrentOutputToUser = () => {
-    const output = document.querySelector("#output");
-    output.innerHTML = currentOutput; 
+const updateUIElementByID = (id, updatedValue) => {
+    const element = document.querySelector(id);
+    element.innerHTML = updatedValue; 
 }
+
 
 const isValidDecimal = (string) => {
     return string == "." && previousEntry.count(".") == 0;
@@ -48,10 +48,12 @@ const updateOutput = (value) => {
     } 
 }
 
-const setOperandOne = () =>{ operandOne = previousEntry}
-
-const applyOperator = (value1, value2, operator) => {
+const performComputation = (value1, value2, operator) => {
     let result;
+
+    value1 = parseFloat(value1)
+    value2 = parseFloat(value2)
+
     switch (operator) {
         case "+":
             result = value1 + value2;
@@ -69,6 +71,7 @@ const applyOperator = (value1, value2, operator) => {
     return result;
   }
 
+
 const getButtonValue = function() {
     const clickedValue = this.value
     previousEntry = currentEntry;
@@ -77,28 +80,39 @@ const getButtonValue = function() {
 
         currentNumber += clickedValue // user can enter consecutive numerals 
         currentEntry = currentNumber;
+
         updateOutput(clickedValue);
 
-        if (operandOne){ // at this point, the user has clicked a number(s) and an operator
-            
+        if (operand1){ // at this point, the user has clicked a number(s) and an operator
+            operand2 = currentNumber
+            console.log(`Computing ${operand1} ${currentOperator} ${operand2}`)
+
+            result = performComputation(operand1, operand2, currentOperator)
+            console.log(`Result: ${result}`)
+            updateUIElementByID("#result", result);
         }
 
     } else if (isOperator(clickedValue) && isNumber(previousEntry)){
 
         if (!isOperator(previousEntry)){ // disable consecutive operators
+            
+            if (!result){
+                operand1 = currentNumber;
+            } else {
+                operand1 = result;
+            }
+            
             currentNumber = "";
             currentEntry = clickedValue;
+            currentOperator = clickedValue;
+
             updateOutput(clickedValue);
 
-            setOperandOne()
+            
         }
     }
 
-    console.log(`Previous: ${previousEntry}`);
-    console.log(`Current: ${currentEntry}`);
-    console.log(`Operand one: ${operandOne}`)
-
-    displayCurrentOutputToUser();
+    updateUIElementByID("#output", currentOutput);;
 }
 
 
