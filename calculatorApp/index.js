@@ -83,23 +83,26 @@ const getButtonValue = function() {
 
         updateOutput(clickedValue);
 
-        if (operand1){ // at this point, the user has clicked a number(s) and an operator
+        if (operand1 || operand1 === 0){ // at this point, the user has clicked a number(s) and an operator
             operand2 = currentNumber
             console.log(`Computing ${operand1} ${currentOperator} ${operand2}`)
 
-            result = performComputation(operand1, operand2, currentOperator)
-            console.log(`Result: ${result}`)
-            updateUIElementByID("#result", result);
+            if (operand2 != "."){
+                result = performComputation(operand1, operand2, currentOperator)
+                console.log(`Result: ${result}`)
+                updateUIElementByID("#result", result);
+            }
+            
         }
 
     } else if (isOperator(clickedValue) && isNumber(previousEntry)){
 
         if (!isOperator(previousEntry)){ // disable consecutive operators
-            
-            if (!result){
-                operand1 = currentNumber;
-            } else {
+
+            if (result || result === 0){
                 operand1 = result;
+            } else {
+                operand1 = currentNumber
             }
             
             currentNumber = "";
