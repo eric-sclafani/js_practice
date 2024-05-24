@@ -39,8 +39,6 @@ const isNumber = (string) => {
 
 const isOperator = (string) => { return ["+", "-", "÷", "×"].includes(string); }
 
-const isEquals = (string) => { return string == "="; }
-
 const updateOutput = (value) => {
 
     if (isNumber(value) || (isOperator(value) && !isOperator(previousEntry))){
@@ -75,7 +73,6 @@ const performComputation = (value1, value2, operator) => {
 const getButtonValue = function() {
     const clickedValue = this.value
     previousEntry = currentEntry;
-    
     if (isNumber(clickedValue)){
 
         currentNumber += clickedValue // user can enter consecutive numerals 
