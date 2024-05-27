@@ -1,0 +1,14 @@
+{
+    
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "esnext",
+        "lib": ["DOM", "ESNEXT", ],
+        "removeComments": true,
+        "moduleResolution": "node",
+
+        "strict":true,
+        "moduleDetection": "force"
+
+    }, 
+}
