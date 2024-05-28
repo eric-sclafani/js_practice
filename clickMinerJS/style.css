@@ -1,97 +1,56 @@
+
 body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap:20vh;
     align-items: center;
     height: 30vh;
     margin: 0; 
-}
-
-.btn {
-    font-size:2rem;
-    font-weight:700;
-    padding:0.5em 1em;
-    color: darkcyan;
-    background-color:coral;
-    border: 10px solid darkcyan;
-    border-radius:5px;
-
-    /* 
-    ! Which property the transition effect should be applied to
-    transition-property: transform;
-
-    ! How long the transition effect should take to complete 
-    transition-duration: 0.3s;
-
-    ! Acceleration curve for the transition 
-    transition-timing-function: ease; (default value is ease)
-
-    ! Delay before the transition should take effect 
-    transition-delay:0s ; (default value is 0s) 
     
-
-    /* This is a shorthand for the above four transition properties 
-       and default values can be omitted
-    */
-    transition: 
-        transform 0.3s ease 0s, 
-        background-color 0.3s ease 0s, 
-        color 0.3s ease 0s;
-
-    /* This applies a transition to all properties */
-    transition: all 0.3s
 }
 
-.btn:hover {
-    background-color:darkcyan;
-    color:lightcoral;
-    border-color:lightcoral;
-    transform:rotate(360deg)
+#pickaxe {
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+#pickaxe .head {
+    border:solid;
+    padding:0 30px 0 30px;
+}
+
+#pickaxe .handle {
+    border:solid;
+    transform:rotate(90deg)
+    
+}
+
+#click-rock:hover{
+    border-radius:60%;
+    color:red;
+    cursor:grab;
+    background-color: lightgray;
 }
 
 
-/* animation name */
-@keyframes slideInLeft {
-
-    /* Beginning of animation, or 0% completed */
-    from {
-        transform:translateX(-300px); /* Element starts at position -300px */    
+@keyframes rotatePickaxe {
+    0% {
+        transform: rotate(0);
     }
 
-    /* End of animation, or 100% completed */
-    to {
-        transform:translateX(0); /* Brings element back to original position */
+    50% {
+        transform: rotate(-90deg);
+    }
+
+    100% {
+        transform:rotate(0)
     }
 }
 
-.heading-1 {
-    /*
-    !Set the custom keyframe 
-    animation-name: slideInLeft;
 
-    !Time it takes for animation to complete from 0% to 100% 
-    animation-duration: 1s ;
+.rotate {
+    animation: rotatePickaxe 0.1s linear 0s forwards;
+    transform-origin: bottom;
 
-    !Acceleration curve for the transition 
-    animation-timing-function: ease-in;
-
-    !Delay before animation  
-    animation-delay: 1s;
-
-    !How many times the animation will run 
-    animation-iteration-count: 1;
-
-    !Whether the animation will run normally or reverse 
-    animation-direction: normal;
-
-    !How the animation will apply keyframe styles before and after its execution 
-    animation-fill-mode: none;
-    */
-
-    /* Shorthand for above */
-    /* animation: slideInLeft 1s ease-in 1s 1 normal none */
-
-    /* shorthand with default values removed */
-    animation: slideInLeft 1s ease-in; 
 }
-

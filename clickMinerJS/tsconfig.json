@@ -3,7 +3,7 @@
     "compileOnSave": true,
     "compilerOptions": {
         "target": "esnext",
-        "lib": ["DOM", "ESNEXT", ],
+        "lib": ["DOM", "ESNEXT"],
         "removeComments": true,
         "moduleResolution": "node",
 

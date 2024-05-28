@@ -12,7 +12,10 @@ This repo contains small practice Javascript/Typescript projects
 
 - More practice on DOM interaction and updating
 - CSS Animations and transitions
+- Learn JQuery
 
+
+- Favicon credits: https://www.istockphoto.com/photo/pickaxe-vintage-gm967674060-263928947?searchscope=image%2Cfilm
 ### Project 3: (something with [this API](https://www.themealdb.com/api.php)) 
 
 ### Project 4: 
