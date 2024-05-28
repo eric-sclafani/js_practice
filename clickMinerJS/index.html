@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="assets/favicon.jpg" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
-    <script src="index.js" defer></script>
-    <title>Click Miner JS</title>
-</head>
-<body>
-    <h1 class="heading-1"> Click Miner JS</h1>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/png" href="assets/img/favicon.jpg" />
+        <script
+            src="http://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="index.js" defer></script>
+        <title>Click Miner JS</title>
+    </head>
+    <body>
 
+        <section id="click-tracker">
+            Times clicked: <span id="clicked">0</span>
+        </section>
 
+        <section id="content">
 
-    <div id="pickaxe">
-        <div class="head"></div>
-        <div class="handle"></div>
-    </div>
+            <h1 class="heading-1"> Click Miner JS</h1>
 
-    <div id="click-rock">Click me</div>
+            <div id="click-area">
 
+                <img src="assets/img/rock.png" id="rock" alt="rock">
 
-</body>
+                <img src="assets/img/pickaxe.png" id="pickaxe">
+            </div>
+
+        </section>
+
+    </body>
 </html>
-

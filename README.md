@@ -15,7 +15,17 @@ This repo contains small practice Javascript/Typescript projects
 - Learn JQuery
 
 
-- Favicon credits: https://www.istockphoto.com/photo/pickaxe-vintage-gm967674060-263928947?searchscope=image%2Cfilm
+#### Credits
+
+(All art will eventually be drawn by me)
+
+- Favicon: https://www.istockphoto.com/photo/pickaxe-vintage-gm967674060-263928947?searchscope=image%2Cfilm
+
+- Rock: https://www.vecteezy.com/png/19527056-an-8-bit-retro-styled-pixel-art-illustration-of-a-stone-rock
+
+- Pickaxe art: https://www.freepik.com/premium-vector/pixel-art-illustration-pickaxe-pixelated-pickaxe-tools-pickaxe-weapon-tools_80978366.htm
+
+- Pickaxe noise: https://freesound.org/people/TechspiredMinds/sounds/728758/
 ### Project 3: (something with [this API](https://www.themealdb.com/api.php)) 
 
 ### Project 4: 

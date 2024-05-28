@@ -1,37 +1,31 @@
 
-body {
+#content {
     display: flex;
     flex-direction: column;
     gap:20vh;
     align-items: center;
     height: 30vh;
     margin: 0; 
-    
+}
+
+#click-tracker {
+    font-size:30px;
+}
+
+#click-area {
+    display:flex; 
+
 }
 
 #pickaxe {
-    display:flex;
-    flex-direction: column;
-    gap:20px;
+    max-width:30%;
 }
 
-#pickaxe .head {
-    border:solid;
-    padding:0 30px 0 30px;
+#rock {
+    max-width: 30%;
+    cursor:pointer
 }
 
-#pickaxe .handle {
-    border:solid;
-    transform:rotate(90deg)
-    
-}
-
-#click-rock:hover{
-    border-radius:60%;
-    color:red;
-    cursor:grab;
-    background-color: lightgray;
-}
 
 
 @keyframes rotatePickaxe {
@@ -50,7 +44,7 @@ body {
 
 
 .rotate {
-    animation: rotatePickaxe 0.1s linear 0s forwards;
+    animation: rotatePickaxe 0.02s linear 0s forwards;
     transform-origin: bottom;
 
 }
