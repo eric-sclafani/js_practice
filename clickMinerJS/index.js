@@ -1,25 +1,27 @@
 var clickRock = $("#rock");
 var pickaxe = $("#pickaxe");
+var clickMessage = $("#click-message");
 var currentClickCount = 0;
 var updateAndDisplayTimesClicked = function () {
     currentClickCount++;
     $("#clicked").html(currentClickCount.toString());
 };
-var animatePickaxe = function () {
-    pickaxe.addClass("rotate");
+var attachAnimation = function (element, className) {
+    element.addClass(className);
     setTimeout(function () {
-        pickaxe.removeClass("rotate");
+        element.removeClass(className);
     }, 300);
 };
 var playAudio = function (path) {
     var audio = new Audio(path);
     audio.play();
 };
-var rockOnClickHandler = function () {
+var rockClickHandler = function () {
     clickRock.on('click', function () {
-        animatePickaxe();
+        attachAnimation(pickaxe, "rotatePickaxe");
+        attachAnimation(clickMessage, "slideInClickMessage");
         playAudio("assets/sfx/pickaxe-strikes-rock.mp3");
         updateAndDisplayTimesClicked();
     });
 };
-rockOnClickHandler();
+rockClickHandler();

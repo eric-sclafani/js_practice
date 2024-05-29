@@ -1,46 +1,67 @@
 body{
     display: flex;
     flex-direction: column;
-
+    justify-content: space-between;
+    background-image: url("assets/img/background.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    min-height:100vh;
+    overflow-y:hidden;
 }
 
-
-#content {
+header {
     display: flex;
-    flex-direction: column;
-    gap:20vh;
-    align-items: center;
-    margin: 0; 
-}
-
-#header {
-    display: flex;
+    flex-wrap:nowrap;
+    white-space: nowrap;
+    overflow: hidden;
     justify-content: space-between;
     align-items: center;
     margin:1rem;
     font-size:30px;
+}
+
+#shop {
+    width:100px;
+    height:30px;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
 
 }
+
+#click-area-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
 
 #click-area {
     display:flex; 
     justify-content: center;
-    
-
+    padding-bottom:50px
 }
 
 #pickaxe {
-    width:10rem;
+    width:200px;
 }
 
 #rock {
-    width:10rem;
+    width:200px;
     cursor:pointer
+}
+
+#click-message {
+    border:solid;
+    width:5rem;
+    height:2rem;
+    text-align:center;  
 }
 
 
 
-
+/*? ANIMATIONS */
 
 @keyframes rotatePickaxe {
     0% {
@@ -56,9 +77,23 @@ body{
     }
 }
 
+@keyframes slideInClickMessage {
+    0% {
+        transform: translateY(500px)
+    }
 
-.rotate {
-    animation: rotatePickaxe 0.02s linear 0s forwards;
+    100% {
+        transform:translateY(0)
+    }
+}
+
+/*? UTILITY CLASSES */
+
+.rotatePickaxe {
+    animation: rotatePickaxe 0.02s;
     transform-origin: bottom;
+}
 
+.slideInClickMessage {
+    animation: slideInClickMessage 0.2s;
 }

@@ -2,6 +2,7 @@
 
 const clickRock = $("#rock");
 const pickaxe = $("#pickaxe");
+const clickMessage = $("#click-message")
 let currentClickCount = 0;
 
 const updateAndDisplayTimesClicked = (): void => {
@@ -9,10 +10,10 @@ const updateAndDisplayTimesClicked = (): void => {
     $("#clicked").html(currentClickCount.toString());
 }
 
-const animatePickaxe = (): void => {
-    pickaxe.addClass("rotate");
+const attachAnimation = (element:JQuery<HTMLElement>, className:string): void => {
+    element.addClass(className);
         setTimeout(() => {
-            pickaxe.removeClass("rotate");
+            element.removeClass(className);
         }, 300)
 }
 
@@ -23,11 +24,12 @@ const playAudio = (path:string) => {
 
 
 const rockClickHandler = (): void => {
-    clickRock.on('click', function () {
+    clickRock.on('click', () => {
 
     
-    animatePickaxe();
-    playAudio("assets/sfx/pickaxe-strikes-rock.mp3")
+    attachAnimation(pickaxe, "rotatePickaxe");
+    attachAnimation(clickMessage, "slideInClickMessage");
+    playAudio("assets/sfx/pickaxe-strikes-rock.mp3");
     updateAndDisplayTimesClicked();
 
         
