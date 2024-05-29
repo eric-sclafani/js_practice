@@ -22,20 +22,20 @@ const playAudio = (path:string) => {
 }
 
 
-const rockOnClickHandler = (): void => {
+const rockClickHandler = (): void => {
     clickRock.on('click', function () {
 
+    
     animatePickaxe();
     playAudio("assets/sfx/pickaxe-strikes-rock.mp3")
     updateAndDisplayTimesClicked();
 
         
 
-        
 
     })
 }
 
 
 
-rockOnClickHandler();
+rockClickHandler();

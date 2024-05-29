@@ -1,30 +1,44 @@
+body{
+    display: flex;
+    flex-direction: column;
+
+}
+
 
 #content {
     display: flex;
     flex-direction: column;
     gap:20vh;
     align-items: center;
-    height: 30vh;
     margin: 0; 
 }
 
-#click-tracker {
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin:1rem;
     font-size:30px;
+
 }
 
 #click-area {
     display:flex; 
+    justify-content: center;
+    
 
 }
 
 #pickaxe {
-    max-width:30%;
+    width:10rem;
 }
 
 #rock {
-    max-width: 30%;
+    width:10rem;
     cursor:pointer
 }
+
+
 
 
 
