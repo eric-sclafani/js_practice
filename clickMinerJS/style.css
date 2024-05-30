@@ -3,10 +3,9 @@ body{
     flex-direction: column;
     justify-content: space-between;
     background-image: url("assets/img/background.jpg");
-    background-repeat: no-repeat;
-    background-size:cover;
+    background-size:cover; /* forces background to cover whole viewport*/
     min-height:100vh;
-    overflow-y:hidden;
+    overflow-y:hidden; /* prevents vertical scrolling */
 }
 
 header {
@@ -20,20 +19,19 @@ header {
     font-size:30px;
 }
 
-#shop {
+#shop-open-button {
     width:100px;
     height:30px;
 }
 
-#content {
-    display: flex;
-    flex-direction: column;
-
+#shop-header{
+    text-align:center;
 }
 
-#click-area-wrapper {
+
+#main-content {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
 }
 
 
@@ -43,25 +41,45 @@ header {
     padding-bottom:50px
 }
 
-#pickaxe {
-    width:200px;
+#rock-area{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:3rem;
 }
+
+#click-message {
+    display: flex;
+    align-items: center;
+    opacity: 0;
+}
+
+#plus-sign {
+    font-size:5rem;
+    font-weight:700;
+}
+
+#gem {
+    width:10rem;
+    height:10rem;
+}
+
 
 #rock {
     width:200px;
     cursor:pointer
 }
 
-#click-message {
-    border:solid;
-    width:5rem;
-    height:2rem;
-    text-align:center;  
+#pickaxe {
+    width:250px;
+    height:250px;
 }
 
 
 
 /*? ANIMATIONS */
+
+
 
 @keyframes rotatePickaxe {
     0% {
@@ -69,7 +87,7 @@ header {
     }
 
     50% {
-        transform: rotate(-90deg);
+        transform: rotate(-70deg);
     }
 
     100% {
@@ -79,18 +97,26 @@ header {
 
 @keyframes slideInClickMessage {
     0% {
-        transform: translateY(500px)
+        transform: translateY(300px);
+        opacity:0
     }
+    
 
     100% {
-        transform:translateY(0)
+        transform:translateY(0);
+        opacity:100%
+
     }
 }
 
+
+
 /*? UTILITY CLASSES */
 
+
+
 .rotatePickaxe {
-    animation: rotatePickaxe 0.02s;
+    animation: rotatePickaxe 0.05s;
     transform-origin: bottom;
 }
 
