@@ -2,7 +2,7 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-image: url("assets/img/background.jpg");
+    background-image: url("../assets/img/background.jpg");
     background-size:cover; /* forces background to cover whole viewport*/
     min-height:100vh;
     overflow-y:hidden; /* prevents vertical scrolling */

@@ -1,7 +1,7 @@
 
 
 
-import { InventoryItem } from "./models/models.js"
+import { InventoryItem } from "../models/models.js"
 
 const clickRock = $("#rock");
 const pickaxe = $("#pickaxe");
@@ -35,7 +35,7 @@ const playAudio = (path:string): void => {
 const fetchStoreInventory = () => {
     
     
-    fetch("data/storeInventory.json")
+    fetch("../data/storeInventory.json")
     .then((response) => (response.json()))
     .then((json) => console.log(json))
 }
@@ -63,7 +63,7 @@ const rockClickHandler = (): void => {
         attachAnimation(pickaxe, "rotatePickaxe");
         attachAnimation(clickMessage, "slideInClickMessage");
 
-        playAudio("assets/sfx/pickaxe-strikes-rock.mp3");
+        playAudio("../assets/sfx/pickaxe-strikes-rock.mp3");
         updateAndDisplayTimesClicked();
 
     })

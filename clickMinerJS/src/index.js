@@ -22,7 +22,7 @@ var playAudio = function (path) {
     audio.play();
 };
 var fetchStoreInventory = function () {
-    fetch("data/storeInventory.json")
+    fetch("../data/storeInventory.json")
         .then(function (response) { return (response.json()); })
         .then(function (json) { return console.log(json); });
 };
@@ -40,7 +40,7 @@ var rockClickHandler = function () {
     clickRock.on("click", function () {
         attachAnimation(pickaxe, "rotatePickaxe");
         attachAnimation(clickMessage, "slideInClickMessage");
-        playAudio("assets/sfx/pickaxe-strikes-rock.mp3");
+        playAudio("../assets/sfx/pickaxe-strikes-rock.mp3");
         updateAndDisplayTimesClicked();
     });
 };
