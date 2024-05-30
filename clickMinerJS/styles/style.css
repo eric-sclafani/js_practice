@@ -1,31 +1,31 @@
-body{
+body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-image: url("../assets/img/background.jpg");
-    background-size:cover; /* forces background to cover whole viewport*/
-    min-height:100vh;
-    overflow-y:hidden; /* prevents vertical scrolling */
+    background-size: cover;
+    min-height: 100vh;
+    overflow-y: hidden;
 }
 
 header {
     display: flex;
-    flex-wrap:nowrap;
+    flex-wrap: nowrap;
     white-space: nowrap;
     overflow: hidden;
     justify-content: space-between;
     align-items: center;
-    margin:1rem;
-    font-size:30px;
+    margin: 1rem;
+    font-size: 30px;
 }
 
 #shop-open-button {
-    width:100px;
-    height:30px;
+    width: 100px;
+    height: 30px;
 }
 
-#shop-header{
-    text-align:center;
+#shop-header {
+    text-align: center;
 }
 
 
@@ -36,16 +36,16 @@ header {
 
 
 #click-area {
-    display:flex; 
+    display: flex;
     justify-content: center;
-    padding-bottom:50px
+    padding-bottom: 50px
 }
 
-#rock-area{
+#rock-area {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:3rem;
+    gap: 3rem;
 }
 
 #click-message {
@@ -55,30 +55,25 @@ header {
 }
 
 #plus-sign {
-    font-size:5rem;
-    font-weight:700;
+    font-size: 5rem;
+    font-weight: 700;
 }
 
 #gem {
-    width:10rem;
-    height:10rem;
+    width: 10rem;
+    height: 10rem;
 }
 
 
 #rock {
-    width:200px;
-    cursor:pointer
+    width: 200px;
+    cursor: pointer
 }
 
 #pickaxe {
-    width:250px;
-    height:250px;
+    width: 250px;
+    height: 250px;
 }
-
-
-
-/*? ANIMATIONS */
-
 
 
 @keyframes rotatePickaxe {
@@ -91,29 +86,22 @@ header {
     }
 
     100% {
-        transform:rotate(0)
+        transform: rotate(0)
     }
 }
 
 @keyframes slideInClickMessage {
     0% {
         transform: translateY(300px);
-        opacity:0
+        opacity: 0
     }
-    
+
 
     100% {
-        transform:translateY(0);
-        opacity:100%
-
+        transform: translateY(0);
+        opacity: 100%
     }
 }
-
-
-
-/*? UTILITY CLASSES */
-
-
 
 .rotatePickaxe {
     animation: rotatePickaxe 0.05s;

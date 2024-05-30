@@ -1,49 +1,46 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var clickRock = $("#rock");
-var pickaxe = $("#pickaxe");
-var clickMessage = $("#click-message");
-var shopOpenButton = $("#shop-open-button");
-var shopCloseButton = $("#shop-close-button");
-var shopDialog = $("#shop-dialog").get(0);
-var currentClickCount = 0;
-var updateAndDisplayTimesClicked = function () {
+const clickRock = $("#rock");
+const pickaxe = $("#pickaxe");
+const clickMessage = $("#click-message");
+const shopOpenButton = $("#shop-open-button");
+const shopCloseButton = $("#shop-close-button");
+const shopDialog = $("#shop-dialog").get(0);
+let currentClickCount = 0;
+const updateAndDisplayTimesClicked = () => {
     currentClickCount++;
     $("#clicked").html(currentClickCount.toString());
 };
-var attachAnimation = function (element, className) {
+const attachAnimation = (element, className, delay = 300) => {
     element.addClass(className);
-    setTimeout(function () {
+    setTimeout(() => {
         element.removeClass(className);
-    }, 300);
+    }, delay);
 };
-var playAudio = function (path) {
-    var audio = new Audio(path);
+const playAudio = (path) => {
+    const audio = new Audio(path);
     audio.play();
 };
-var fetchStoreInventory = function () {
-    fetch("../data/storeInventory.json")
-        .then(function (response) { return (response.json()); })
-        .then(function (json) { return console.log(json); });
-};
-var storeInventory = [];
-// Handlers
-var dialogButtonsHandler = function () {
-    shopOpenButton.on("click", function () {
+async function fetchStoreInventoryData(path) {
+    const response = await fetch(path);
+    return response.json();
+}
+const data = await fetchStoreInventoryData("../data/storeInventory.json");
+console.log(data);
+const dialogButtonsHandler = () => {
+    shopOpenButton.on("click", () => {
         shopDialog.showModal();
     });
-    shopCloseButton.on("click", function () {
+    shopCloseButton.on("click", () => {
         shopDialog.close();
     });
 };
-var rockClickHandler = function () {
-    clickRock.on("click", function () {
+const rockClickHandler = () => {
+    clickRock.on("click", () => {
         attachAnimation(pickaxe, "rotatePickaxe");
         attachAnimation(clickMessage, "slideInClickMessage");
         playAudio("../assets/sfx/pickaxe-strikes-rock.mp3");
         updateAndDisplayTimesClicked();
     });
 };
-// Function calls
 rockClickHandler();
 dialogButtonsHandler();
+export {};

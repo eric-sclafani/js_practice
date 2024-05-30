@@ -1,7 +1,6 @@
 
+import { InventoryItem } from "../models/models.js";
 
-
-import { InventoryItem } from "../models/models.js"
 
 const clickRock = $("#rock");
 const pickaxe = $("#pickaxe");
@@ -19,11 +18,11 @@ const updateAndDisplayTimesClicked = (): void => {
     $("#clicked").html(currentClickCount.toString());
 }
 
-const attachAnimation = (element:JQuery<HTMLElement>, className:string): void => {
+const attachAnimation = (element:JQuery<HTMLElement>, className:string, delay:number = 300): void => {
     element.addClass(className);
         setTimeout(() => {
             element.removeClass(className);
-        }, 300)
+        }, delay);
 }
 
 const playAudio = (path:string): void => {
@@ -32,19 +31,19 @@ const playAudio = (path:string): void => {
 }
 
 
-const fetchStoreInventory = () => {
-    
-    
-    fetch("../data/storeInventory.json")
-    .then((response) => (response.json()))
-    .then((json) => console.log(json))
+async function fetchStoreInventoryData(path:string): Promise<JSON> {
+    const response = await fetch(path);
+    return response.json();
+
 }
 
-const storeInventory: InventoryItem[] = [];
+const data = await fetchStoreInventoryData("../data/storeInventory.json");
+console.log(data);
 
 
 
-// Handlers
+
+
 
 
 const dialogButtonsHandler = () => {
@@ -70,10 +69,6 @@ const rockClickHandler = (): void => {
 }
 
 
-
-
-
-// Function calls
 
 rockClickHandler();
 dialogButtonsHandler();
