@@ -29,6 +29,11 @@ header {
 }
 
 
+#shop-items {
+    color:purple;
+}
+
+
 #main-content {
     display: flex;
     flex-direction: column;

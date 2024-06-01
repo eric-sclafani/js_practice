@@ -4,6 +4,7 @@ const clickMessage = $("#click-message");
 const shopOpenButton = $("#shop-open-button");
 const shopCloseButton = $("#shop-close-button");
 const shopDialog = $("#shop-dialog").get(0);
+const shopItems = $("#shop-items");
 let currentClickCount = 0;
 const updateAndDisplayTimesClicked = () => {
     currentClickCount++;
@@ -19,18 +20,32 @@ const playAudio = (path) => {
     const audio = new Audio(path);
     audio.play();
 };
-async function fetchStoreInventoryData(path) {
+async function fetchStoreInventory(path) {
     const response = await fetch(path);
     return response.json();
 }
-const data = await fetchStoreInventoryData("../data/storeInventory.json");
-console.log(data);
+const addItemsToShopDisplay = (storeInventory) => {
+    for (let item of storeInventory) {
+        const li = document.createElement("li");
+        li.innerHTML = `Item name: ${item.name} Item Price: $${item.price}`;
+        shopItems.append(li);
+    }
+};
+const removeItemsFromShopDisplay = () => {
+    shopItems.empty();
+};
+async function displayShopItems() {
+    const storeInventory = await fetchStoreInventory("../data/storeInventory.json");
+    addItemsToShopDisplay(storeInventory);
+}
 const dialogButtonsHandler = () => {
     shopOpenButton.on("click", () => {
+        displayShopItems();
         shopDialog.showModal();
     });
     shopCloseButton.on("click", () => {
         shopDialog.close();
+        removeItemsFromShopDisplay();
     });
 };
 const rockClickHandler = () => {
