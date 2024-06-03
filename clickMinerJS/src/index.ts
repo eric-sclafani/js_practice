@@ -19,49 +19,56 @@ const updateAndDisplayTimesClicked = (): void => {
     $("#clicked").html(currentClickCount.toString());
 }
 
-const attachAnimation = (element:JQuery<HTMLElement>, className:string, delay:number = 300): void => {
+const attachAnimation = (element: JQuery<HTMLElement>, className: string, delay: number = 300): void => {
     element.addClass(className);
-        setTimeout(() => {
-            element.removeClass(className);
-        }, delay);
+    setTimeout(() => {
+        element.removeClass(className);
+    }, delay);
 }
 
-const playAudio = (path:string): void => {
+const playAudio = (path: string): void => {
     const audio = new Audio(path);
     audio.play();
 }
 
 
-async function fetchStoreInventory(path:string): Promise<InventoryItem[]> {
+async function fetchStoreInventory(path: string): Promise<InventoryItem[]> {
     const response = await fetch(path);
     return response.json();
 
 }
 
-const addItemsToShopDisplay = (storeInventory:InventoryItem[]): void => {
+const createShopItem = (item: InventoryItem, itemText:string):HTMLLIElement => {
+    const shopItem = document.createElement("li");
+    shopItem.className = "shop-item";
+    
+    const shopItemText = document.createElement("div");
+    shopItemText.innerHTML = itemText;
+    shopItemText.className = "shop-item-text";
+    
+    const shopBuyButton = document.createElement("button");
+    shopBuyButton.className = "shop-buy-button";
+    shopBuyButton.innerHTML = "Buy";
+
+    shopItem.append(shopItemText, shopBuyButton);
+    return shopItem;
+    
+    
+    
+}
+
+const addItemsToShopDisplay = (storeInventory: InventoryItem[]): void => {
     for (let item of storeInventory) {
-        const li = document.createElement("li");
-        li.innerHTML = `Item name: ${item.name} Item Price: $${item.price}`;
-        shopItems.append(li);
+        const inventoryItem = createShopItem(item, `Item name: ${item.name} Item Price: $${item.price}`);
+        shopItems.append(inventoryItem);
     }
 }
 
-const removeItemsFromShopDisplay = (): void => {
-    shopItems.empty();
-    
-}
- 
 
-async function displayShopItems():Promise<void> {
+async function displayShopItems(): Promise<void> {
     const storeInventory = await fetchStoreInventory("../data/storeInventory.json");
     addItemsToShopDisplay(storeInventory);
 }
-
-
-
-
-
-
 
 
 
@@ -71,13 +78,13 @@ const dialogButtonsHandler = () => {
     shopOpenButton.on("click", () => {
         displayShopItems();
         shopDialog.showModal();
-        
+
     })
 
     shopCloseButton.on("click", () => {
-        
+
         shopDialog.close();
-        removeItemsFromShopDisplay();
+        shopItems.empty(); // removes shop items from modal
     })
 }
 

@@ -33,6 +33,9 @@ header {
     color:purple;
 }
 
+.shop-item {
+    display: flex;
+}
 
 #main-content {
     display: flex;
