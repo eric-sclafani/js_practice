@@ -4,6 +4,7 @@ This repo contains small practice Javascript/Typescript projects
 
 ### Project 1: Omega Calculator
 
+- First JS project ever
 - How to pull elements from the DOM
 - Create and add element to the DOM
 - Read user actions and update the DOM accordingly
@@ -14,10 +15,7 @@ This repo contains small practice Javascript/Typescript projects
 - CSS Animations and transitions
 - Learn JQuery
 
-
 #### Credits
-
-(All art will eventually be drawn by me)
 
 - Favicon: https://www.istockphoto.com/photo/pickaxe-vintage-gm967674060-263928947?searchscope=image%2Cfilm
 
@@ -36,7 +34,9 @@ This repo contains small practice Javascript/Typescript projects
 
 ### Project 3: (something with [this API](https://www.themealdb.com/api.php) and [this one](https://www.thecocktaildb.com/api.php)) 
 
-### Project 4: 
+- How to request and receive data from APIs
+
+### Project 4: Interactive tutorial for how the internet works? 
 
 ### Project 5:
 

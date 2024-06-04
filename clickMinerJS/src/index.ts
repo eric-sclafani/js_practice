@@ -1,24 +1,13 @@
 
 import { InventoryItem } from "../models/models.js";
 
+let playerGemsCount = 0;
+const playerUpgrades = [];
 
-const clickRock = $("#rock");
-const pickaxe = $("#pickaxe");
-const clickMessage = $("#click-message");
-const amountPerClick = $("#click-amount")
-
-const shopOpenButton = $("#shop-open-button");
-const shopCloseButton = $("#shop-close-button");
-
-const shopDialog = $("#shop-dialog").get(0) as HTMLDialogElement;
-const shopItems = $("#shop-items");
-
-let currentGemsCount = 0;
-let gemsPerClick = 1;
 
 const updateAndDisplayTimesClicked = (): void => {
-    currentGemsCount++
-    $("#clicked").html(currentGemsCount.toString());
+    playerGemsCount++
+    $("#clicked").html(playerGemsCount.toString());
 }
 
 const attachAnimation = (element: JQuery<HTMLElement>, className: string, delay: number = 300): void => {
@@ -46,7 +35,6 @@ const playPickaxeNoise = ():void => {
         "../assets/sfx/pickaxe-striking-rock-3.mp3"
     ]
     const choice = randomChoice(sfxPaths); 
-    console.log(choice);
     playAudio(choice);
 }
 
@@ -68,12 +56,14 @@ const createShopItem = (itemText:string):HTMLLIElement => {
     const shopBuyButton = document.createElement("button");
     shopBuyButton.className = "shop-buy-button";
     shopBuyButton.innerHTML = "Buy";
+    shopBuyButton.value = itemText;
 
     shopItem.append(shopItemText, shopBuyButton);
     return shopItem;
 }
 
 const addItemsToShopDisplay = (storeInventory: InventoryItem[]): void => {
+    const shopItems = $("#shop-items");
     for (let item of storeInventory) {
         const inventoryItem = createShopItem(`${item.name} ${item.price}`);
         shopItems.append(inventoryItem);
@@ -85,16 +75,20 @@ async function buildShopDisplay(): Promise<void> {
     addItemsToShopDisplay(storeInventory);
 }
 
-
-
-
-
-
-
-
 const shopDialogHandler = () => {
-
     buildShopDisplay();
+    const shopOpenButton = $("#shop-open-button");
+    const shopCloseButton = $("#shop-close-button");
+    const shopDialog = $("#shop-dialog").get(0) as HTMLDialogElement;
+    const shopBuyButton = $(".shop-buy-button")
+    console.log(shopBuyButton) 
+
+    $("html").on("keydown", (event) => {
+        if (event.key == "s"){
+            shopDialog.showModal(); 
+        }
+    })
+
     shopOpenButton.on("click", () => {
         shopDialog.showModal();
 
@@ -104,12 +98,17 @@ const shopDialogHandler = () => {
         shopDialog.close();
     })
 
-    
-
+    shopBuyButton.on("click", function () {
+        console.log("hello");
+    })
 
 }
 
 const rockClickHandler = (): void => {
+    const clickRock = $("#rock");
+    const pickaxe = $("#pickaxe");
+    const clickMessage = $("#click-message");
+
     clickRock.on("click", () => {
         attachAnimation(pickaxe, "rotatePickaxe");
         attachAnimation(clickMessage, "slideInClickMessage");
@@ -126,3 +125,4 @@ const rockClickHandler = (): void => {
 
 rockClickHandler();
 shopDialogHandler();
+
