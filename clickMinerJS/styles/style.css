@@ -19,6 +19,15 @@ header {
     font-size: 30px;
 }
 
+#gem-counter{
+    display: flex;
+    align-items: center;
+}
+
+#shop-dialog::backdrop {
+    backdrop-filter: blur(5px);
+}
+
 #shop-open-button {
     width: 100px;
     height: 30px;
@@ -31,11 +40,14 @@ header {
 
 #shop-items {
     color:purple;
+    padding-left:0;
 }
 
 .shop-item {
     display: flex;
+    gap:3rem;
 }
+
 
 #main-content {
     display: flex;
@@ -62,16 +74,15 @@ header {
     opacity: 0;
 }
 
-#plus-sign {
+#click-message-text {
     font-size: 5rem;
     font-weight: 700;
 }
 
-#gem {
-    width: 10rem;
-    height: 10rem;
+.gem {
+    width: 8rem;
+    height: 8rem;
 }
-
 
 #rock {
     width: 200px;

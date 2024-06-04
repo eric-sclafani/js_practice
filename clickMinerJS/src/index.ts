@@ -5,6 +5,7 @@ import { InventoryItem } from "../models/models.js";
 const clickRock = $("#rock");
 const pickaxe = $("#pickaxe");
 const clickMessage = $("#click-message");
+const amountPerClick = $("#click-amount")
 
 const shopOpenButton = $("#shop-open-button");
 const shopCloseButton = $("#shop-close-button");
@@ -12,11 +13,12 @@ const shopCloseButton = $("#shop-close-button");
 const shopDialog = $("#shop-dialog").get(0) as HTMLDialogElement;
 const shopItems = $("#shop-items");
 
-let currentClickCount = 0;
+let currentGemsCount = 0;
+let gemsPerClick = 1;
 
 const updateAndDisplayTimesClicked = (): void => {
-    currentClickCount++
-    $("#clicked").html(currentClickCount.toString());
+    currentGemsCount++
+    $("#clicked").html(currentGemsCount.toString());
 }
 
 const attachAnimation = (element: JQuery<HTMLElement>, className: string, delay: number = 300): void => {
@@ -38,7 +40,7 @@ async function fetchStoreInventory(path: string): Promise<InventoryItem[]> {
 
 }
 
-const createShopItem = (item: InventoryItem, itemText:string):HTMLLIElement => {
+const createShopItem = (itemText:string):HTMLLIElement => {
     const shopItem = document.createElement("li");
     shopItem.className = "shop-item";
     
@@ -52,20 +54,16 @@ const createShopItem = (item: InventoryItem, itemText:string):HTMLLIElement => {
 
     shopItem.append(shopItemText, shopBuyButton);
     return shopItem;
-    
-    
-    
 }
 
 const addItemsToShopDisplay = (storeInventory: InventoryItem[]): void => {
     for (let item of storeInventory) {
-        const inventoryItem = createShopItem(item, `Item name: ${item.name} Item Price: $${item.price}`);
+        const inventoryItem = createShopItem(`Item name: ${item.name} Item Price: $${item.price}`);
         shopItems.append(inventoryItem);
     }
 }
 
-
-async function displayShopItems(): Promise<void> {
+async function buildShopDisplay(): Promise<void> {
     const storeInventory = await fetchStoreInventory("../data/storeInventory.json");
     addItemsToShopDisplay(storeInventory);
 }
@@ -73,19 +71,30 @@ async function displayShopItems(): Promise<void> {
 
 
 
-const dialogButtonsHandler = () => {
 
+
+
+
+const updateGemsPerClickDisplay = () => {
+    amountPerClick.html(gemsPerClick.toString());
+}
+
+
+const shopDialogHandler = () => {
+
+    buildShopDisplay();
     shopOpenButton.on("click", () => {
-        displayShopItems();
         shopDialog.showModal();
 
     })
 
     shopCloseButton.on("click", () => {
-
         shopDialog.close();
-        shopItems.empty(); // removes shop items from modal
     })
+
+    
+
+
 }
 
 const rockClickHandler = (): void => {
@@ -101,5 +110,7 @@ const rockClickHandler = (): void => {
 
 
 
+
+
 rockClickHandler();
-dialogButtonsHandler();
+shopDialogHandler();
