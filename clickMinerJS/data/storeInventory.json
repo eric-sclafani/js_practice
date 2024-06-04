@@ -1,8 +1,4 @@
 [
-    {"name" : "upgrade1", "price": 1},
-    {"name" : "upgrade2", "price": 2},
-    {"name" : "upgrade3", "price": 3},
-    {"name" : "upgrade4", "price": 4},
-    {"name" : "upgrade5", "price": 5},
-    {"name" : "upgrade6", "price": 6}
+    {"name" : "Helping hand", "price": 100},
+    {"name" : "Double gems", "price": 1500}
 ]

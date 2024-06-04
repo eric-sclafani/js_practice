@@ -25,7 +25,11 @@ This repo contains small practice Javascript/Typescript projects
 
 - Pickaxe art: https://www.freepik.com/premium-vector/pixel-art-illustration-pickaxe-pixelated-pickaxe-tools-pickaxe-weapon-tools_80978366.htm
 
-- Pickaxe noise: https://freesound.org/people/TechspiredMinds/sounds/728758/
+- Pickaxe noises: 
+    - https://freesound.org/people/TechspiredMinds/sounds/728758/
+    - https://freesound.org/people/bigal13/sounds/654499/
+    - https://pixabay.com/users/floraphonic-38928062/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=200421 
+    
 
 - Background image: https://craftpix.net/freebies/free-summer-pixel-art-backgrounds/
 

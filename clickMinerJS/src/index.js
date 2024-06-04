@@ -22,6 +22,20 @@ const playAudio = (path) => {
     const audio = new Audio(path);
     audio.play();
 };
+const playPickaxeNoise = () => {
+    function randomChoice(choices) {
+        const index = Math.floor(Math.random() * choices.length);
+        return choices[index];
+    }
+    const sfxPaths = [
+        "../assets/sfx/pickaxe-striking-rock-1.mp3",
+        "../assets/sfx/pickaxe-striking-rock-2.mp3",
+        "../assets/sfx/pickaxe-striking-rock-3.mp3"
+    ];
+    const choice = randomChoice(sfxPaths);
+    console.log(choice);
+    playAudio(choice);
+};
 async function fetchStoreInventory(path) {
     const response = await fetch(path);
     return response.json();
@@ -40,7 +54,7 @@ const createShopItem = (itemText) => {
 };
 const addItemsToShopDisplay = (storeInventory) => {
     for (let item of storeInventory) {
-        const inventoryItem = createShopItem(`Item name: ${item.name} Item Price: $${item.price}`);
+        const inventoryItem = createShopItem(`${item.name} ${item.price}`);
         shopItems.append(inventoryItem);
     }
 };
@@ -48,9 +62,6 @@ async function buildShopDisplay() {
     const storeInventory = await fetchStoreInventory("../data/storeInventory.json");
     addItemsToShopDisplay(storeInventory);
 }
-const updateGemsPerClickDisplay = () => {
-    amountPerClick.html(gemsPerClick.toString());
-};
 const shopDialogHandler = () => {
     buildShopDisplay();
     shopOpenButton.on("click", () => {
@@ -64,7 +75,7 @@ const rockClickHandler = () => {
     clickRock.on("click", () => {
         attachAnimation(pickaxe, "rotatePickaxe");
         attachAnimation(clickMessage, "slideInClickMessage");
-        playAudio("../assets/sfx/pickaxe-strikes-rock.mp3");
+        playPickaxeNoise();
         updateAndDisplayTimesClicked();
     });
 };

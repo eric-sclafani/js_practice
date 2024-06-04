@@ -33,6 +33,23 @@ const playAudio = (path: string): void => {
     audio.play();
 }
 
+const playPickaxeNoise = ():void => {
+
+    function randomChoice(choices:Array<any>) {
+        const index = Math.floor(Math.random() * choices.length);
+        return choices[index];
+    }
+
+    const sfxPaths = [
+        "../assets/sfx/pickaxe-striking-rock-1.mp3",
+        "../assets/sfx/pickaxe-striking-rock-2.mp3",
+        "../assets/sfx/pickaxe-striking-rock-3.mp3"
+    ]
+    const choice = randomChoice(sfxPaths); 
+    console.log(choice);
+    playAudio(choice);
+}
+
 
 async function fetchStoreInventory(path: string): Promise<InventoryItem[]> {
     const response = await fetch(path);
@@ -58,7 +75,7 @@ const createShopItem = (itemText:string):HTMLLIElement => {
 
 const addItemsToShopDisplay = (storeInventory: InventoryItem[]): void => {
     for (let item of storeInventory) {
-        const inventoryItem = createShopItem(`Item name: ${item.name} Item Price: $${item.price}`);
+        const inventoryItem = createShopItem(`${item.name} ${item.price}`);
         shopItems.append(inventoryItem);
     }
 }
@@ -73,11 +90,6 @@ async function buildShopDisplay(): Promise<void> {
 
 
 
-
-
-const updateGemsPerClickDisplay = () => {
-    amountPerClick.html(gemsPerClick.toString());
-}
 
 
 const shopDialogHandler = () => {
@@ -102,7 +114,7 @@ const rockClickHandler = (): void => {
         attachAnimation(pickaxe, "rotatePickaxe");
         attachAnimation(clickMessage, "slideInClickMessage");
 
-        playAudio("../assets/sfx/pickaxe-strikes-rock.mp3");
+        playPickaxeNoise();
         updateAndDisplayTimesClicked();
 
     })
