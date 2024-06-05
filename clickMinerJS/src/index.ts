@@ -45,18 +45,18 @@ async function fetchStoreInventory(path: string): Promise<InventoryItem[]> {
 
 }
 
-const createShopItem = (itemText:string):HTMLLIElement => {
+const createShopItem = (item:InventoryItem):HTMLLIElement => {
     const shopItem = document.createElement("li");
     shopItem.className = "shop-item";
     
     const shopItemText = document.createElement("div");
-    shopItemText.innerHTML = itemText;
+    shopItemText.innerHTML = `${item.name} ${item.price} `;
     shopItemText.className = "shop-item-text";
     
     const shopBuyButton = document.createElement("button");
     shopBuyButton.className = "shop-buy-button";
     shopBuyButton.innerHTML = "Buy";
-    shopBuyButton.value = itemText;
+    shopBuyButton.value = item.name;
 
     shopItem.append(shopItemText, shopBuyButton);
     return shopItem;
@@ -65,23 +65,24 @@ const createShopItem = (itemText:string):HTMLLIElement => {
 const addItemsToShopDisplay = (storeInventory: InventoryItem[]): void => {
     const shopItems = $("#shop-items");
     for (let item of storeInventory) {
-        const inventoryItem = createShopItem(`${item.name} ${item.price}`);
+        const inventoryItem = createShopItem(item);
         shopItems.append(inventoryItem);
     }
 }
+
 
 async function buildShopDisplay(): Promise<void> {
     const storeInventory = await fetchStoreInventory("../data/storeInventory.json");
     addItemsToShopDisplay(storeInventory);
 }
 
-const shopDialogHandler = () => {
-    buildShopDisplay();
+async function shopDialogHandler(): Promise<void> {
+    await buildShopDisplay();
     const shopOpenButton = $("#shop-open-button");
     const shopCloseButton = $("#shop-close-button");
     const shopDialog = $("#shop-dialog").get(0) as HTMLDialogElement;
-    const shopBuyButton = $(".shop-buy-button")
-    console.log(shopBuyButton) 
+    const shopBuyButton = $(".shop-buy-button");
+
 
     $("html").on("keydown", (event) => {
         if (event.key == "s"){
@@ -98,9 +99,7 @@ const shopDialogHandler = () => {
         shopDialog.close();
     })
 
-    shopBuyButton.on("click", function () {
-        console.log("hello");
-    })
+    
 
 }
 

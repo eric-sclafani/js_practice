@@ -13,7 +13,13 @@ This repo contains small practice Javascript/Typescript projects
 
 - More practice on DOM interaction and updating
 - CSS Animations and transitions
-- Learn JQuery
+- Learn basics of JQuery
+
+- Many features need to be implemented still:
+    - Player upgrade buying system
+    - Improve Animations
+    - Draw my own pixel art
+    - Split the code into modules
 
 #### Credits
 
