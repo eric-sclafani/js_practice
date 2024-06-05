@@ -4,45 +4,20 @@ This repo contains small practice Javascript/Typescript projects
 
 ### Project 1: Omega Calculator
 
-- First JS project ever
-- How to pull elements from the DOM
-- Create and add element to the DOM
-- Read user actions and update the DOM accordingly
-
 ### Project 2: clickMinerJS
 
-- More practice on DOM interaction and updating
-- CSS Animations and transitions
-- Learn basics of JQuery
+### Project 3: Classic TODO application
 
-- Many features need to be implemented still:
-    - Player upgrade buying system
-    - Improve Animations
-    - Draw my own pixel art
-    - Split the code into modules
+### Project 4: 
 
-#### Credits
+### Project 5: Interactive tutorial for how the internet works? 
 
-- Favicon: https://www.istockphoto.com/photo/pickaxe-vintage-gm967674060-263928947?searchscope=image%2Cfilm
+### Project 6: Something involving APIs
 
-- Rock: https://www.vecteezy.com/png/19527056-an-8-bit-retro-styled-pixel-art-illustration-of-a-stone-rock
+### Project 7:
 
-- Pickaxe art: https://www.freepik.com/premium-vector/pixel-art-illustration-pickaxe-pixelated-pickaxe-tools-pickaxe-weapon-tools_80978366.htm
+### Project 8:
 
-- Pickaxe noises: 
-    - https://freesound.org/people/TechspiredMinds/sounds/728758/
-    - https://freesound.org/people/bigal13/sounds/654499/
-    - https://pixabay.com/users/floraphonic-38928062/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=200421 
-    
+### Project 9:
 
-- Background image: https://craftpix.net/freebies/free-summer-pixel-art-backgrounds/
-
-
-### Project 3: (something with [this API](https://www.themealdb.com/api.php) and [this one](https://www.thecocktaildb.com/api.php)) 
-
-- How to request and receive data from APIs
-
-### Project 4: Interactive tutorial for how the internet works? 
-
-### Project 5:
-
+### Project 10:
