@@ -14,7 +14,7 @@ This repo contains small practice Javascript/Typescript projects
 
 ### Project 6: Something involving APIs
 
-### Project 7:
+### Project 7: Snake game?
 
 ### Project 8:
 
