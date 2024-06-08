@@ -15,8 +15,30 @@ const createTodoItem = (text) => {
     todoItemWrapper.append(removeButton);
     return todoItemWrapper;
 };
-const addTodoItemToDOM = (todo) => {
-    $("#todo-items").append(todo);
+function randomChoice(choices) {
+    const index = Math.floor(Math.random() * choices.length);
+    return choices[index];
+}
+const addTodoItemToDOM = (todo, forceAnim = "") => {
+    if (!forceAnim) {
+        const todoAnimDirections = [
+            "Top",
+            "Bottom",
+            "Left",
+            "Right",
+            "TopLeft",
+            "TopRight",
+            "BottomLeft",
+            "BottomRight"
+        ];
+        const selection = "slideFrom".concat(randomChoice(todoAnimDirections));
+        todo.classList.add(selection);
+        $("#todo-items").append(todo);
+    }
+    else {
+        todo.classList.add(forceAnim);
+        $("#todo-items").append(todo);
+    }
 };
 const attachSubmitEventHandler = () => {
     const form = $('#main-form');
@@ -28,4 +50,12 @@ const attachSubmitEventHandler = () => {
         formInput.val(""); // reset textbox
     });
 };
+// var checkbox = document.querySelector("input[name=checkbox]");
+// checkbox.addEventListener('change', function() {
+//   if (this.checked) {
+//     console.log("Checkbox is checked..");
+//   } else {
+//     console.log("Checkbox is not checked..");
+//   }
+// });
 attachSubmitEventHandler();

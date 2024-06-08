@@ -15,6 +15,7 @@ header {
 
 #todo-items{
 
+
 }
 
 .todo-remove {
@@ -26,4 +27,145 @@ header {
 
 .todo-item-wrapper {
     display:flex;
+    gap:10px;
 }
+
+
+/* Animations */
+
+@keyframes slideFromTop{
+    from {
+        transform:translateY(-50px);
+        opacity:0;
+    }
+
+    to {
+        transform:translateY(0px);
+        opacity:100%;
+    }
+}
+
+@keyframes slideFromBottom {
+    from {
+        transform:translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        opacity: 100%;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideFromRight{
+    from {
+        transform:translateX(50px);
+        opacity:0;
+    }
+
+    to {
+        transform:translateX(0px);
+        opacity:100%;
+    }
+}
+
+
+@keyframes slideFromLeft{
+    from { transform:translateX(-50px); opacity:0; }
+
+    to {
+        transform:translateX(0px);
+        opacity:100%;
+    }
+}
+
+@keyframes slideFromTopLeft{
+    from {
+        transform:translate(-50px, -50px);
+        opacity:0;
+    }
+
+    to {
+        transform:translate(0);
+        opacity:100%;
+    }
+}
+
+@keyframes slideFromTopRight{
+    from {
+        transform:translate(50px, -50px);
+        opacity:0;
+    }
+
+    to {
+        transform:translate(0);
+        opacity:100%;
+    }
+}
+
+@keyframes slideFromBottomLeft{
+    from {
+        transform:translate(-50px, 50px);
+        opacity:0;
+    }
+
+    to {
+        transform:translate(0);
+        opacity:100%;
+    }
+}
+
+@keyframes slideFromBottomRight{
+    from {
+        transform:translate(50px, 50px);
+        opacity:0;
+    }
+
+    to {
+        transform:translate(0);
+        opacity:100%;
+    }
+}
+
+.slideFromTop { animation: slideFromTop 0.8s linear; }
+.slideFromBottom { animation: slideFromBottom 0.8s linear; }
+.slideFromLeft { animation: slideFromLeft 0.8s linear; }
+.slideFromRight { animation: slideFromRight 0.8s linear; }
+.slideFromTopLeft {animation: slideFromTopLeft 0.8s linear; }
+.slideFromTopRight { animation: slideFromTopRight 0.8s linear; }
+.slideFromBottomLeft { animation: slideFromBottomLeft 0.8s linear; }
+.slideFromBottomRight { animation: slideFromBottomRight 0.8s linear; }
+
+
+/* @keyframes bounceFromTopLeft {
+
+    0% {
+        transform:translate(-500px,-150px);
+        opacity:0;
+    }
+
+     25%{
+        transform:translate(-350px, 0px);
+    }
+
+    50% {
+       
+    }
+
+    75% {
+        
+    }  
+
+    100% {
+        transform:translate(0,0);
+        opacity:100%;
+    }
+
+}
+.bounceFromTopLeft {
+    animation:bounceFromTopLeft 3s cubic-bezier(.74,2.03,.49,-0.85);
+} */
+
+
+
+
