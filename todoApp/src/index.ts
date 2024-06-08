@@ -1,27 +1,46 @@
 
+const attachCheckboxEventHandler = () => {
+    
+    
+}
 
-
-const createTodoItem  = (text:string):HTMLDivElement => {
-    const todoItemWrapper = document.createElement("div");
-    todoItemWrapper.className = "todo-item-wrapper";
-
+const createTodoCheckbox = (todoNum:number):HTMLInputElement => {
     const todoCheckbox = document.createElement("input");
     todoCheckbox.type = "checkbox";
+    todoCheckbox.className = `checkbox-${todoNum}`;
+    return todoCheckbox;
+}
 
+const createTodoText = (text:string):HTMLDivElement => {
     const todoText = document.createElement("div");
     todoText.innerHTML = text;
     todoText.className = "todo-text";
+    return todoText;
+}
 
+const createRemoveButton = ():HTMLButtonElement => {
     const removeButton = document.createElement("button");
     removeButton.className = "todo-remove";
     removeButton.innerHTML = "<i class='fa-regular fa-trash'></i>";
+    return removeButton;
+}
 
-    todoItemWrapper.append(todoCheckbox);
-    todoItemWrapper.append(todoText);
-    todoItemWrapper.append(removeButton);
+
+
+const createTodoItem  = (text:string, todoNum:number):HTMLDivElement => {
+    const todoItemWrapper = document.createElement("div");
+    todoItemWrapper.className = `todo-item-wrapper-${todoNum}`;
+
+    todoItemWrapper.append(createTodoCheckbox(todoNum));
+    todoItemWrapper.append(createTodoText(text));
+    todoItemWrapper.append(createRemoveButton());
 
     return todoItemWrapper;
 }
+
+// const getTodoWrapper = (todoNumber:string):string => {
+
+// }
 
 function randomChoice(choices:Array<string>):string {
     const index = Math.floor(Math.random() * choices.length);
@@ -54,6 +73,7 @@ const addTodoItemToDOM = (todo:HTMLDivElement, forceAnim:string = ""):void => {
 
 const attachSubmitEventHandler = ():void => {
     const form = $('#main-form');
+    let todoCount = 0;
 
     form.on("submit", (event) => {
         event.preventDefault();
@@ -61,14 +81,18 @@ const attachSubmitEventHandler = ():void => {
         const formInputText = formInput.val() as string;
 
         addTodoItemToDOM(
-            createTodoItem(formInputText),
+            createTodoItem(formInputText, todoCount),
         );
 
+        todoCount++
         formInput.val(""); // reset textbox
+        
 
 
     });
 }
+
+
 
 // var checkbox = document.querySelector("input[name=checkbox]");
 

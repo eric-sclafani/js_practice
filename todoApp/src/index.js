@@ -1,20 +1,34 @@
 "use strict";
-const createTodoItem = (text) => {
-    const todoItemWrapper = document.createElement("div");
-    todoItemWrapper.className = "todo-item-wrapper";
+const attachCheckboxEventHandler = () => {
+};
+const createTodoCheckbox = (todoNum) => {
     const todoCheckbox = document.createElement("input");
     todoCheckbox.type = "checkbox";
+    todoCheckbox.className = `checkbox-${todoNum}`;
+    return todoCheckbox;
+};
+const createTodoText = (text) => {
     const todoText = document.createElement("div");
     todoText.innerHTML = text;
     todoText.className = "todo-text";
+    return todoText;
+};
+const createRemoveButton = () => {
     const removeButton = document.createElement("button");
     removeButton.className = "todo-remove";
     removeButton.innerHTML = "<i class='fa-regular fa-trash'></i>";
-    todoItemWrapper.append(todoCheckbox);
-    todoItemWrapper.append(todoText);
-    todoItemWrapper.append(removeButton);
+    return removeButton;
+};
+const createTodoItem = (text, todoNum) => {
+    const todoItemWrapper = document.createElement("div");
+    todoItemWrapper.className = `todo-item-wrapper-${todoNum}`;
+    todoItemWrapper.append(createTodoCheckbox(todoNum));
+    todoItemWrapper.append(createTodoText(text));
+    todoItemWrapper.append(createRemoveButton());
     return todoItemWrapper;
 };
+// const getTodoWrapper = (todoNumber:string):string => {
+// }
 function randomChoice(choices) {
     const index = Math.floor(Math.random() * choices.length);
     return choices[index];
@@ -42,11 +56,13 @@ const addTodoItemToDOM = (todo, forceAnim = "") => {
 };
 const attachSubmitEventHandler = () => {
     const form = $('#main-form');
+    let todoCount = 0;
     form.on("submit", (event) => {
         event.preventDefault();
         const formInput = form.find('input[name="todo-input"]');
         const formInputText = formInput.val();
-        addTodoItemToDOM(createTodoItem(formInputText));
+        addTodoItemToDOM(createTodoItem(formInputText, todoCount));
+        todoCount++;
         formInput.val(""); // reset textbox
     });
 };

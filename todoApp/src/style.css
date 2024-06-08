@@ -25,7 +25,8 @@ header {
     border:none;
 }
 
-.todo-item-wrapper {
+/* Matches all elems that start with todo-item-wrapper */
+[class^="todo-item-wrapper-"] {
     display:flex;
     gap:10px;
 }
