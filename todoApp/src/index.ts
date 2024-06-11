@@ -1,3 +1,6 @@
+import { generateRandomTodo } from "./randomTodoGenerator.js";
+
+let todoCount = 0;
 
 const getTodoWrapper = (checkboxNumber:string):HTMLElement|null => {
     const todoItems = $("#todo-items").children();
@@ -6,7 +9,7 @@ const getTodoWrapper = (checkboxNumber:string):HTMLElement|null => {
             return item;
         }
     }
-    return null
+    return null;
 }
 
 
@@ -23,10 +26,6 @@ const checkboxEventHandler = function (this:HTMLInputElement) {
         todoWrapper.style.color = "black"; 
     }
 
-
-
-    
-    
 }
 
 const createTodoCheckbox = (todoNum:number):HTMLInputElement => {
@@ -91,11 +90,9 @@ const addTodoItemToDOM = (todo:HTMLDivElement, forceAnim:string = ""):void => {
     
 }
 
-
 const attachSubmitEventHandler = ():void => {
     const form = $('#main-form');
-    let todoCount = 0;
-
+    
     form.on("submit", (event) => {
         event.preventDefault();
         const formInput = form.find('input[name="todo-input"]');
@@ -105,25 +102,25 @@ const attachSubmitEventHandler = ():void => {
             createTodoItem(formInputText, todoCount),
         );
 
-        todoCount++
+        todoCount++;
         formInput.val(""); // reset textbox
-        
-
-
     });
+}
+
+async function attachRandomTodoButtonHandler():Promise<void> {
+
+    const randomTodoButton = $("#generate-random-todo");
+
+    randomTodoButton.on("click", async function () {
+        const randomTodoText:string = (await generateRandomTodo()).todo;
+        addTodoItemToDOM(
+            createTodoItem(randomTodoText, todoCount),
+        );
+        todoCount++; 
+    })
 }
 
 
 
-// var checkbox = document.querySelector("input[name=checkbox]");
-
-// checkbox.addEventListener('change', function() {
-//   if (this.checked) {
-//     console.log("Checkbox is checked..");
-//   } else {
-//     console.log("Checkbox is not checked..");
-//   }
-// });
-
-
-attachSubmitEventHandler()
+attachSubmitEventHandler();
+attachRandomTodoButtonHandler();

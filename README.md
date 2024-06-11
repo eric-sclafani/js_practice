@@ -8,9 +8,9 @@ This repo contains small practice Javascript/Typescript projects
 
 ### Project 3: Classic TODO application
 
-### Project 4: 
+### Project 4: Weather App 
 
-### Project 5: Interactive tutorial for how the internet works? 
+### Project 5: 
 
 ### Project 6: Something involving APIs
 
@@ -18,6 +18,6 @@ This repo contains small practice Javascript/Typescript projects
 
 ### Project 8:
 
-### Project 9:
+### Project 9: Interactive tutorial for how the internet works? 
 
 ### Project 10:

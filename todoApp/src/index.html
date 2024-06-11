@@ -22,16 +22,22 @@
             <h1>Awesome TODO App</h1>
         </header>
 
-        <form method="get" id="main-form" name="main-form">
+        <section id="main-content">
+            <form method="get" id="main-form" name="main-form">
 
-            <div id="todo-wrapper">
-                <label id="todo-label" for="todo-input">TODO:</label>
-                <input id="todo-input" type="text" name="todo-input" required autofocus>
-                <button>Submit</button>
-            </div>
-
-        </form>
-
+                <div id="todo-list-wrapper">
+                    <label id="todo-label" for="todo-input">TODO:</label>
+                    <input id="todo-input" type="text" name="todo-input" required autofocus>
+                    <button>Submit</button>
+                </div>
+    
+                <div id="or-text">OR...</div>
+            </form>
+    
+            <button id="generate-random-todo">Generate random TODO item</button>
+        </section>
+        
+        
         <main id="todo-items"></main>
 
     </body>
