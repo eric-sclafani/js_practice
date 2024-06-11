@@ -1,5 +1,30 @@
 
-const attachCheckboxEventHandler = () => {
+const getTodoWrapper = (checkboxNumber:string):HTMLElement|null => {
+    const todoItems = $("#todo-items").children();
+    for (const item of todoItems) {
+        if (item.classList[0].slice(-1) == checkboxNumber){
+            return item;
+        }
+    }
+    return null
+}
+
+
+const checkboxEventHandler = function (this:HTMLInputElement) {
+    
+    const checkboxNumber = this.className.slice(-1);
+    const todoWrapper = getTodoWrapper(checkboxNumber) as HTMLElement;
+
+    if (this.checked){
+        todoWrapper.style.textDecoration = "line-through";
+        todoWrapper.style.color = "gray";
+    } else {
+        todoWrapper.style.textDecoration = "none";
+        todoWrapper.style.color = "black"; 
+    }
+
+
+
     
     
 }
@@ -8,6 +33,7 @@ const createTodoCheckbox = (todoNum:number):HTMLInputElement => {
     const todoCheckbox = document.createElement("input");
     todoCheckbox.type = "checkbox";
     todoCheckbox.className = `checkbox-${todoNum}`;
+    todoCheckbox.addEventListener("change", checkboxEventHandler);
     return todoCheckbox;
 }
 
@@ -26,7 +52,6 @@ const createRemoveButton = ():HTMLButtonElement => {
 }
 
 
-
 const createTodoItem  = (text:string, todoNum:number):HTMLDivElement => {
     const todoItemWrapper = document.createElement("div");
     todoItemWrapper.className = `todo-item-wrapper-${todoNum}`;
@@ -37,10 +62,6 @@ const createTodoItem  = (text:string, todoNum:number):HTMLDivElement => {
 
     return todoItemWrapper;
 }
-
-// const getTodoWrapper = (todoNumber:string):string => {
-
-// }
 
 function randomChoice(choices:Array<string>):string {
     const index = Math.floor(Math.random() * choices.length);

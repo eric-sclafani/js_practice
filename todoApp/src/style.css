@@ -1,3 +1,7 @@
+:root {
+    --anim-time:0.5s;
+}
+
 body {
     display:flex;
     flex-direction: column;
@@ -72,7 +76,10 @@ header {
 
 
 @keyframes slideFromLeft{
-    from { transform:translateX(-50px); opacity:0; }
+    from { 
+        transform:translateX(-50px); 
+        opacity:0; 
+    }
 
     to {
         transform:translateX(0px);
@@ -128,14 +135,14 @@ header {
     }
 }
 
-.slideFromTop { animation: slideFromTop 0.8s linear; }
-.slideFromBottom { animation: slideFromBottom 0.8s linear; }
-.slideFromLeft { animation: slideFromLeft 0.8s linear; }
-.slideFromRight { animation: slideFromRight 0.8s linear; }
-.slideFromTopLeft {animation: slideFromTopLeft 0.8s linear; }
-.slideFromTopRight { animation: slideFromTopRight 0.8s linear; }
-.slideFromBottomLeft { animation: slideFromBottomLeft 0.8s linear; }
-.slideFromBottomRight { animation: slideFromBottomRight 0.8s linear; }
+.slideFromTop { animation: slideFromTop var(--anim-time) linear; }
+.slideFromBottom { animation: slideFromBottom var(--anim-time) linear; }
+.slideFromLeft { animation: slideFromLeft var(--anim-time) linear; }
+.slideFromRight { animation: slideFromRight var(--anim-time) linear; }
+.slideFromTopLeft {animation: slideFromTopLeft var(--anim-time) linear; }
+.slideFromTopRight { animation: slideFromTopRight var(--anim-time) linear; }
+.slideFromBottomLeft { animation: slideFromBottomLeft var(--anim-time) linear; }
+.slideFromBottomRight { animation: slideFromBottomRight var(--anim-time) linear; }
 
 
 /* @keyframes bounceFromTopLeft {
@@ -166,7 +173,3 @@ header {
 .bounceFromTopLeft {
     animation:bounceFromTopLeft 3s cubic-bezier(.74,2.03,.49,-0.85);
 } */
-
-
-
-

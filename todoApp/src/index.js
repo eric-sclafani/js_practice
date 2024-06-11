@@ -1,10 +1,30 @@
 "use strict";
-const attachCheckboxEventHandler = () => {
+const getTodoWrapper = (checkboxNumber) => {
+    const todoItems = $("#todo-items").children();
+    for (const item of todoItems) {
+        if (item.classList[0].slice(-1) == checkboxNumber) {
+            return item;
+        }
+    }
+    return null;
+};
+const checkboxEventHandler = function () {
+    const checkboxNumber = this.className.slice(-1);
+    const todoWrapper = getTodoWrapper(checkboxNumber);
+    if (this.checked) {
+        todoWrapper.style.textDecoration = "line-through";
+        todoWrapper.style.color = "gray";
+    }
+    else {
+        todoWrapper.style.textDecoration = "none";
+        todoWrapper.style.color = "black";
+    }
 };
 const createTodoCheckbox = (todoNum) => {
     const todoCheckbox = document.createElement("input");
     todoCheckbox.type = "checkbox";
     todoCheckbox.className = `checkbox-${todoNum}`;
+    todoCheckbox.addEventListener("change", checkboxEventHandler);
     return todoCheckbox;
 };
 const createTodoText = (text) => {
@@ -27,8 +47,6 @@ const createTodoItem = (text, todoNum) => {
     todoItemWrapper.append(createRemoveButton());
     return todoItemWrapper;
 };
-// const getTodoWrapper = (todoNumber:string):string => {
-// }
 function randomChoice(choices) {
     const index = Math.floor(Math.random() * choices.length);
     return choices[index];
