@@ -30,12 +30,46 @@
                     <input id="todo-input" type="text" name="todo-input" required autofocus>
                 </div>
                 
-                <button id="submit">Submit</button>
+
+                <button class="cool-button" id="submit">
+                    Submit
+                    <svg>
+                      <defs>
+                        <filter id="glow">
+                          <fegaussianblur result="coloredBlur" stddeviation="5"></fegaussianblur>
+                          <femerge>
+                            <femergenode in="coloredBlur"></femergenode>
+                            <femergenode in="coloredBlur"></femergenode>
+                            <femergenode in="coloredBlur"></femergenode>
+                            <femergenode in="SourceGraphic"></femergenode>
+                          </femerge>
+                        </filter>
+                      </defs>
+                      <rect />
+                    </svg>
+                  </button>
     
                 <div id="or-text">OR<span id="or-dots">...</span></div>
             </form>
     
-            <button id="generate-random-todo">Random</button>
+            <button class="cool-button" id="generate-random-todo">
+                Random
+                <svg>
+                  <defs>
+                    <filter id="glow">
+                      <fegaussianblur result="coloredBlur" stddeviation="5"></fegaussianblur>
+                      <femerge>
+                        <femergenode in="coloredBlur"></femergenode>
+                        <femergenode in="coloredBlur"></femergenode>
+                        <femergenode in="coloredBlur"></femergenode>
+                        <femergenode in="SourceGraphic"></femergenode>
+                      </femerge>
+                    </filter>
+                  </defs>
+                  <rect />
+                </svg>
+              </button>
+              
         </section>
         
         
