@@ -66,6 +66,40 @@ const addTodoItemToDOM = (todo, forceAnim = "") => {
         $("#todo-items").append(todo);
     }
 };
+const addFontsToDropdown = (fonts) => {
+    const elementFrag = document.createDocumentFragment();
+    for (const font of fonts) {
+        let option = document.createElement("option");
+        option.textContent = font;
+        elementFrag.append(option);
+    }
+    $("#todo-font-dropdown").append(elementFrag);
+};
+const attachFontDropdownEventHandler = () => {
+    const fonts = [
+        "Arial, sans-serif",
+        "Trebuchet MS, sans-serif",
+        "Verdana, sans-serif",
+        "Optima, sans-serif",
+        "American Typewriter, serif",
+        "Courier New, monospace",
+        "Comic Sans MS, Comic Sans, cursive",
+        "Apple Chancery, cursive",
+        "Bradley Hand, cursive",
+        "Brush Script MT, Brush Script Std, cursive",
+        "Snell Roundhand, cursive",
+        "Impact, fantasy",
+        "Chalkduster, fantasy",
+        "Luminari, fantasy",
+        "Trattatello, fantasy",
+    ];
+    addFontsToDropdown(fonts);
+    const todoDropdown = $("#todo-font-dropdown");
+    todoDropdown.on("change", () => {
+        const selectedFont = todoDropdown.val();
+        $("#todo-items").css("font-family", selectedFont);
+    });
+};
 const attachSubmitEventHandler = () => {
     const form = $('#main-form');
     form.on("submit", (event) => {
@@ -88,5 +122,6 @@ async function attachRandomTodoButtonHandler() {
         todoCount++;
     });
 }
+attachFontDropdownEventHandler();
 attachSubmitEventHandler();
 attachRandomTodoButtonHandler();

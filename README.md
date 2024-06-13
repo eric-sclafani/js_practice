@@ -12,12 +12,12 @@ This repo contains small practice Javascript/Typescript projects
 
 ### Project 5: 
 
-### Project 6: Something involving APIs
+### Project 6: 
 
-### Project 7: Snake game?
+### Project 7: 
 
-### Project 8: 
+### Project 8: Something with [Groq API](https://console.groq.com/docs/quickstart)? 
 
-### Project 9: Interactive tutorial for how the internet works? 
+### Project 9: Interactive tutorial for how the internet works? Maybe incorporate three.js here
 
 ### Project 10: Some kind of shop where users can sign up, add items to cart, check out, etc...
