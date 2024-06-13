@@ -12,6 +12,7 @@ async function getRandomTodo():Promise<TodoItem> {
 
 }
 
+
 export async function generateRandomTodo ():Promise<TodoItem> {
     const data = await getRandomTodo();
     return data;

@@ -34,18 +34,11 @@ const createTodoText = (text) => {
     todoText.className = "todo-text";
     return todoText;
 };
-const createRemoveButton = () => {
-    const removeButton = document.createElement("button");
-    removeButton.className = "todo-remove";
-    removeButton.innerHTML = "<i class='fa-regular fa-trash'></i>";
-    return removeButton;
-};
 const createTodoItem = (text, todoNum) => {
     const todoItemWrapper = document.createElement("div");
     todoItemWrapper.className = `todo-item-wrapper-${todoNum}`;
     todoItemWrapper.append(createTodoCheckbox(todoNum));
     todoItemWrapper.append(createTodoText(text));
-    todoItemWrapper.append(createRemoveButton());
     return todoItemWrapper;
 };
 function randomChoice(choices) {
@@ -87,8 +80,11 @@ const attachSubmitEventHandler = () => {
 async function attachRandomTodoButtonHandler() {
     const randomTodoButton = $("#generate-random-todo");
     randomTodoButton.on("click", async function () {
-        const randomTodoText = (await generateRandomTodo()).todo;
-        addTodoItemToDOM(createTodoItem(randomTodoText, todoCount));
+        let text = (await generateRandomTodo()).todo;
+        if (!text) {
+            text = "Oops! Could not generate a rantom TODO item. Sorry 😢";
+        }
+        addTodoItemToDOM(createTodoItem(text, todoCount));
         todoCount++;
     });
 }

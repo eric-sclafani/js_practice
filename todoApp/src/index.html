@@ -5,11 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="assets/favicon.png" />
         <link rel="stylesheet" href="style.css">
-        <link href="assets/font-awesome/css/fontawesome.css"
-            rel="stylesheet" />
-        <link href="assets/font-awesome/css/brands.css"
-            rel="stylesheet" />
-        <link href="assets/font-awesome/css/solid.css" rel="stylesheet" />
         <script
             src="http://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script> var exports = {}; </script>
@@ -20,21 +15,27 @@
 
         <header>
             <h1>Awesome TODO App</h1>
+
+            <select id="todo-font-dropdown">
+                <option value="" selected hidden>Select font</option>
+
+            </select>
         </header>
 
         <section id="main-content">
             <form method="get" id="main-form" name="main-form">
 
-                <div id="todo-list-wrapper">
+                <div id="todo-input-wrapper">
                     <label id="todo-label" for="todo-input">TODO:</label>
                     <input id="todo-input" type="text" name="todo-input" required autofocus>
-                    <button>Submit</button>
                 </div>
+                
+                <button id="submit">Submit</button>
     
-                <div id="or-text">OR...</div>
+                <div id="or-text">OR<span id="or-dots">...</span></div>
             </form>
     
-            <button id="generate-random-todo">Generate random TODO item</button>
+            <button id="generate-random-todo">Random</button>
         </section>
         
         

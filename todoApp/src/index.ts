@@ -43,21 +43,12 @@ const createTodoText = (text:string):HTMLDivElement => {
     return todoText;
 }
 
-const createRemoveButton = ():HTMLButtonElement => {
-    const removeButton = document.createElement("button");
-    removeButton.className = "todo-remove";
-    removeButton.innerHTML = "<i class='fa-regular fa-trash'></i>";
-    return removeButton;
-}
-
-
 const createTodoItem  = (text:string, todoNum:number):HTMLDivElement => {
     const todoItemWrapper = document.createElement("div");
     todoItemWrapper.className = `todo-item-wrapper-${todoNum}`;
 
     todoItemWrapper.append(createTodoCheckbox(todoNum));
     todoItemWrapper.append(createTodoText(text));
-    todoItemWrapper.append(createRemoveButton());
 
     return todoItemWrapper;
 }
@@ -112,9 +103,14 @@ async function attachRandomTodoButtonHandler():Promise<void> {
     const randomTodoButton = $("#generate-random-todo");
 
     randomTodoButton.on("click", async function () {
-        const randomTodoText:string = (await generateRandomTodo()).todo;
+        let text:string = (await generateRandomTodo()).todo;
+
+        if (!text){
+            text = "Oops! Could not generate a rantom TODO item. Sorry 😢";
+        }
+
         addTodoItemToDOM(
-            createTodoItem(randomTodoText, todoCount),
+            createTodoItem(text, todoCount),
         );
         todoCount++; 
     })

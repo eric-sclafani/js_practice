@@ -2,7 +2,7 @@
 
 - More DOM interacton practice
 - CSS Animations
-- Small API practice
+- Minor API practice
 
 
 ## Planned features 
@@ -10,4 +10,5 @@
 - [x] When user hit "Enter" or select the "Add" button, it will add it to the list with a checkbox
 - [x] When the user clicks the checkbox, the todo item will get a strike through and gray out
 - [x] When the todo item is added to list, it will play a random animation.
-- [ ] User can click a button to generate a random TODO
+- [x] User can click a button to generate a random TODO
+- [ ] Add dropdown of todo font selections
