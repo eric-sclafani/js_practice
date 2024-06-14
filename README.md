@@ -14,7 +14,7 @@ This repo contains small practice Javascript/Typescript projects
 
 ### Project 6: 
 
-### Project 7: 
+### Project 7:
 
 ### Project 8: Something with [Groq API](https://console.groq.com/docs/quickstart)? 
 

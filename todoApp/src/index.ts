@@ -160,3 +160,4 @@ async function attachRandomTodoButtonHandler():Promise<void> {
 attachFontDropdownEventHandler();
 attachSubmitEventHandler();
 attachRandomTodoButtonHandler();
+
