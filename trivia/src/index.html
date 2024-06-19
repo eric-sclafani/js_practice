@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./index.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
+    <title>Trivia App</title>
+</head>
+<body>
+    <form>
+        <ul id="form-params">
+            <li id="num-questions" class="form-param">
+                <label for="num-questions">Number of Questions</label>
+                <input name="num-questions" type="number" min="1" max="50">
+            </li>
+
+            <li id="category" class="form-param">
+                <label for="category">Select Category</label>
+                <select name="category"></select>
+            </li>
+
+            <li id="difficulty" class="form-param">
+                <label for="difficulty">Select Difficulty</label>
+                <select name="difficulty"></select>
+            </li>
+
+            <li id="type" class="form-param">
+                <label for="type">Select Type</label>
+                <select name="type"></select>
+            </li>
+        </ul>
+        <button id="submit">Submit</button>
+    </form>
+    
+</body>
+</html>

@@ -8,16 +8,16 @@ This repo contains small practice Javascript/Typescript projects
 
 ### Project 3: Classic TODO application
 
-### Project 4: Weather App 
+### Project 4: Trivia App with [this api](https://opentdb.com/api_config.php) 
 
-### Project 5: 
+### Project 5: Blogging App
 
 ### Project 6: 
 
 ### Project 7:
 
-### Project 8: Something with [Groq API](https://console.groq.com/docs/quickstart)? 
+### Project 8:
 
-### Project 9: Interactive tutorial for how the internet works? Maybe incorporate three.js here
+### Project 9: 
 
-### Project 10: Some kind of shop where users can sign up, add items to cart, check out, etc...
+### Project 10: 
