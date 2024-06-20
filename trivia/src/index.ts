@@ -1,32 +1,32 @@
-interface Category{
-    id:number
-    name:string
-}
-
-interface CategoryResponse {
-    trivia_categories: Category[]
-}
-
-
-async function fetchAllCategories (url:string):Promise<CategoryResponse> {
-    const response = (await fetch(url)).json();
-    return response
-}
+import { parseCategoryData } from "./categories.js"
 
 
 
 
-async function parseCategories ():Promise<void> {
-    const categories = await fetchAllCategories("https://opentdb.com/api_category.php");
-    const data = categories["trivia_categories"];
-    console.log(data)
+
+
+async function populateCategoryDropdown ():Promise<void>{
+    await parseCategoryData();
+    const categoryDropdown = $("select[name='category']");
+
+    const categoryNames:string[] = JSON.parse(localStorage.names);
+    const categoryIDs:number[] = JSON.parse(localStorage.IDs);
+
+    for (const name of categoryNames) {
+        const option = document.createElement("option");
+        option.innerText = name;
+        option.className = "category-selection";
+
+        const value = categoryIDs[categoryNames.indexOf(name)].toString();
+        option.value = value;
+
+        categoryDropdown.append(option)
+    }
 
 
     
-    
 }
 
 
 
-
-parseCategories();
+populateCategoryDropdown();

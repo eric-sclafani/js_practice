@@ -1,11 +1,16 @@
-"use strict";
-async function fetchAllCategories(url) {
-    const response = (await fetch(url)).json();
-    return response;
+import { parseCategoryData } from "./categories.js";
+async function populateCategoryDropdown() {
+    await parseCategoryData();
+    const categoryDropdown = $("select[name='category']");
+    const categoryNames = JSON.parse(localStorage.names);
+    const categoryIDs = JSON.parse(localStorage.IDs);
+    for (const name of categoryNames) {
+        const option = document.createElement("option");
+        option.innerText = name;
+        option.className = "category-selection";
+        const value = categoryIDs[categoryNames.indexOf(name)].toString();
+        option.value = value;
+        categoryDropdown.append(option);
+    }
 }
-async function parseCategories() {
-    const categories = await fetchAllCategories("https://opentdb.com/api_category.php");
-    const data = categories["trivia_categories"];
-    console.log(data);
-}
-parseCategories();
+populateCategoryDropdown();
