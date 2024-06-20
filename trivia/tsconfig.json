@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
     "target": "es2022",
     "lib": ["DOM", "ES2023"],                                        
     "module": "ES2022",                                                  
