@@ -57,5 +57,6 @@ const attachFormEventHandler = () => {
 }
 
 
+
 populateCategoryDropdown();
 attachFormEventHandler();

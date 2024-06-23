@@ -1,49 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="module" src="../dist/index.js" defer></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="./style.css">
-    <title>Trivia App</title>
-</head>
-<body>
-    <form>
-        <ul id="form-params">
-            <li id="num-questions" class="form-param">
-                <label for="num-questions">Number of Questions</label>
-                <input name="num-questions" type="number" min="1" max="50" value="10">
-            </li>
-
-            <li id="category" class="form-param">
-                <label for="category">Select Category</label>
-                <select name="category">
-                    <option value="any">Any Category</option>
-                </select>
-            </li>
-
-            <li id="difficulty" class="form-param">
-                <label for="difficulty">Select Difficulty</label>
-                <select name="difficulty">
-                    <option value="any">Any Difficulty</option>
-                    <option value="easy">Easy</option>
-                    <option value="medium">Medium</option>
-                    <option value="hard">Hard</option>
-                </select>
-            </li>
-
-            <li id="type" class="form-param">
-                <label for="type">Select Type</label>
-                <select name="type">
-                    <option value="any">Any Type</option>
-                    <option value="multiple">Multiple Choice</option>
-                    <option value="boolean">True / False</option>
-                </select>
-            </li>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="module" src="../dist/index.js" defer></script>
+        <script
+            src="http://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="./style.css">
+        <title>Trivia App</title>
+    </head>
+    <body>
+       
+        <ul class="trivia-header">
+            <li>T</li>
+            <li>r</li>
+            <li>i</li>
+            <li>v</li>
+            <li>i</li>
+            <li>a</li>
         </ul>
-        <button id="submit">Submit</button>
-    </form>
-    
-</body>
+
+        <form class="questions-params-form">
+            <ul id="form-params">
+                <li id="num-questions" class="form-param-wrapper">
+                    <label for="num-questions">Number of Questions</label>
+                    <input class="form-param" name="num-questions" type="number" min="1" max="50"
+                        value="10">
+                </li>
+
+                <li id="category" class="form-param-wrapper">
+                    <label for="category">Select Category</label>
+                    <select class="form-param" name="category">
+                        <option value="any">Any Category</option>
+                    </select>
+                </li>
+
+                <li id="difficulty" class="form-param-wrapper">
+                    <label for="difficulty">Select Difficulty</label>
+                    <select class="form-param" name="difficulty">
+                        <option value="any">Any Difficulty</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </li>
+
+                <li id="type" class="form-param-wrapper">
+                    <label for="type">Select Type</label>
+                    <select class="form-param" name="type">
+                        <option value="any">Any Type</option>
+                        <option value="multiple">Multiple Choice</option>
+                        <option value="boolean">True / False</option>
+                    </select>
+                </li>
+            </ul>
+            <button id="submit">Submit</button>
+            <button type="reset" id="reset">Reset</button>
+        </form>
+
+    </body>
 </html>
