@@ -46,17 +46,32 @@ const generateAPIUrl = (formData:JQuery.NameValuePair[]) => {
     return url;
 }
 
-const attachFormEventHandler = () => {
-    const form = $("form");
-    form.on("submit", (event) => {
-        event.preventDefault();
+const createUrlOnSubmit = (event:any, form:JQuery<HTMLElement>):void => {
+    event.preventDefault();
         const formData = form.serializeArray();
         const url = generateAPIUrl(formData)
+        localStorage["API_URL"] = url;
         console.log(url)
-    })
 }
 
 
 
+
+
+
+const attachFormEventHandlers = () => {
+    const form = $("form");
+
+    form.on("submit", (event) => createUrlOnSubmit(event, form))
+}
+
+
+
+
+
+
+
+
+
 populateCategoryDropdown();
-attachFormEventHandler();
+attachFormEventHandlers();

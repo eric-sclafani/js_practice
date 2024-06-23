@@ -7,7 +7,7 @@
         <script
             src="http://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <link rel="stylesheet" href="./style.css">
-        <title>Trivia App</title>
+        <title>Trivia</title>
     </head>
     <body>
        
@@ -54,15 +54,20 @@
                     </select>
                 </li>
             </ul>
-            <button id="submit">Submit</button>
-            <button type="reset" id="reset">Reset</button>
+            <div id="form-buttons">
+                <button id="submit">Submit</button>
+                <button type="reset" id="reset">Reset</button>
+            </div>
+            
         </form>
 
-
+        <dialog>
+            <button>Close</button>
+            <p>This modal dialog has a groovy backdrop!</p>
+          </dialog>
+          
         <footer>
-            <hr>
             Questions come from the <a href="https://opentdb.com/" target="_blank">Open Trivia Database</a>
-            <hr>
         </footer>
 
     </body>
