@@ -12,14 +12,12 @@ body {
     display:flex;
     flex-direction:column;
     align-items:center;
-    background-image:url("assets/background.jpg");
-    background-size:cover;
-    overflow:hidden;
+    background: rgb(238,174,202);
+    background: linear-gradient(90deg, rgba(238,174,202,1) 13%, rgba(219,232,248,1) 51%, rgba(148,187,233,1) 95%); 
 }
 
-
 .trivia-header {
-    font-size:5rem; 
+    font-size:6rem; 
     font-weight:700px;
     color:whitesmoke;
     text-shadow: lightskyblue 1px 0 10px;
@@ -28,7 +26,6 @@ body {
     padding-left:0;
     gap:20px;
     margin:10px
-
 }
 
 .trivia-header li:nth-child(6){
@@ -77,12 +74,68 @@ body {
     }
 }
 
+#content {
+    display:flex;
+    gap:5vw;
+}
+
+#question-marks-left{
+    padding: 0 40px 0 0
+}
+
+#question-marks-left,
+#question-marks-right {
+    display:flex;
+    flex-direction: column;
+    margin:0;
+    font-size:9rem;
+    list-style:none;
+    color:white;
+    animation: emitShadowQM 1.5s infinite
+
+}
+
+#question-marks-left .qm:nth-child(even),
+#question-marks-right .qm:nth-child(even) {
+    rotate:30deg;
+}
+
+#question-marks-left .qm:nth-child(odd),
+#question-marks-right .qm:nth-child(odd) {
+    rotate:-30deg;
+}
+
+.qm:hover{
+    animation: rotateQM 1s;
+}
+
+@keyframes rotateQM {
+    to {
+        transform:rotate(360deg)
+    }
+}
+
+@keyframes emitShadowQM {
+    0% {
+        text-shadow: none;
+    }
+
+    50%{
+        text-shadow: white 1px 0 10px;
+    }
+
+    100% {
+        text-shadow:none;
+    }
+}
+
+
 .questions-params-form{
     border:solid white;
     border-radius:20px;
     border-width:1em;
     box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-    padding:5vh 10vw 5vh 10vw;
+    padding:4vh 10vw 4vh 10vw;
     animation: border-anim 2s
 }
 
