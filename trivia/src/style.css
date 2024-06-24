@@ -17,15 +17,15 @@ body {
 }
 
 .trivia-header {
-    font-size:6rem; 
+    font-size:5rem; 
     font-weight:700px;
-    color:whitesmoke;
+    color:white;
     text-shadow: lightskyblue 1px 0 10px;
     display:flex;
     list-style:none;
     padding-left:0;
     gap:20px;
-    margin:10px
+    margin:0
 }
 
 .trivia-header li:nth-child(6){
@@ -88,7 +88,7 @@ body {
     display:flex;
     flex-direction: column;
     margin:0;
-    font-size:9rem;
+    font-size:5rem;
     list-style:none;
     color:white;
     animation: emitShadowQM 1.5s infinite

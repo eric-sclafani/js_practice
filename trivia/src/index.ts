@@ -1,6 +1,7 @@
 import { parseCategoryData } from "./categories.js"
 
 
+
 async function populateCategoryDropdown ():Promise<void>{
     await parseCategoryData();
     const categoryDropdown = $("select[name='category']");
@@ -46,23 +47,35 @@ const generateAPIUrl = (formData:JQuery.NameValuePair[]) => {
     return url;
 }
 
-const createUrlOnSubmit = (event:any, form:JQuery<HTMLElement>):void => {
+async function createUrlOnSubmit (event:any, form:JQuery<HTMLElement>):Promise<void>  {
     event.preventDefault();
         const formData = form.serializeArray();
         const url = generateAPIUrl(formData)
         localStorage["API_URL"] = url;
-        console.log(url)
+        console.log(url);
+
+
+
+        
 }
-
-
 
 
 
 
 const attachFormEventHandlers = () => {
     const form = $("form");
+    const dialog = document.querySelector("#question-dialog") as HTMLDialogElement;
 
     form.on("submit", (event) => createUrlOnSubmit(event, form))
+
+    form.on("submit", (event) => {
+        event.preventDefault();
+        dialog.showModal();
+    })
+
+    $("#quit-dialog").on("click", () => {
+        dialog.close();
+    })
 }
 
 
@@ -75,3 +88,4 @@ const attachFormEventHandlers = () => {
 
 populateCategoryDropdown();
 attachFormEventHandlers();
+

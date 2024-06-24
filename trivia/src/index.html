@@ -26,24 +26,26 @@
                 <li class="qm">?</li>
                 <li class="qm">?</li>
                 <li class="qm">?</li>
+                <li class="qm">?</li>
+                <li class="qm">?</li>
             </ul>
     
             <form class="questions-params-form">
                 <ul id="form-params">
-                    <li id="num-questions" class="form-param-wrapper">
+                    <li id="num-questions" class="form-param-wrapper" title="Amount of questions">
                         <label for="num-questions">Number of Questions</label>
                         <input id="num-questions" class="form-param" name="num-questions" type="number" min="1" max="50"
                             value="10">
                     </li>
     
-                    <li id="category" class="form-param-wrapper">
+                    <li id="category" class="form-param-wrapper" title="Category of the questions">
                         <label for="category">Select Category</label>
                         <select class="form-param" name="category">
                             <option value="any">Any Category</option>
                         </select>
                     </li>
     
-                    <li id="difficulty" class="form-param-wrapper">
+                    <li id="difficulty" class="form-param-wrapper" title="Difficulty of the questions">
                         <label for="difficulty">Select Difficulty</label>
                         <select class="form-param" name="difficulty">
                             <option value="any">Any Difficulty</option>
@@ -53,7 +55,7 @@
                         </select>
                     </li>
     
-                    <li id="type" class="form-param-wrapper">
+                    <li id="type" class="form-param-wrapper" title="Type of questions">
                         <label for="type">Select Type</label>
                         <select class="form-param" name="type">
                             <option value="any">Any Type</option>
@@ -74,14 +76,18 @@
                 <li class="qm">?</li>
                 <li class="qm">?</li>
                 <li class="qm">?</li>
+                <li class="qm">?</li>
+                <li class="qm">?</li>
             </ul>
         </section>
 
-        
-
-        <dialog>
-            <button>Close</button>
-            <p>This is a dialog</p>
+        <dialog id="question-dialog">
+            <form>
+                
+                <button type="button" id="quit-dialog">Quit</button>
+                <button id="question-submit">Next</button>
+                
+            </form>
           </dialog>
           
         <footer>
