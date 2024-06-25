@@ -1,24 +1,4 @@
-import { parseCategoryData } from "./categories.js"
-
-
-
-async function populateCategoryDropdown ():Promise<void>{
-    await parseCategoryData();
-    const categoryDropdown = $("select[name='category']");
-
-    const categoryNames:string[] = JSON.parse(localStorage.names);
-    const categoryIDs:number[] = JSON.parse(localStorage.IDs);
-
-    for (const name of categoryNames) {
-        const option = document.createElement("option");
-        option.innerText = name;
-        option.className = "category-selection";
-
-        const value = categoryIDs[categoryNames.indexOf(name)].toString();
-        option.value = value;
-        categoryDropdown.append(option)
-    } 
-}
+import { populateCategoryDropdown } from "./categories.js"
 
 const getAmount = (value:string):string => {
     return `amount=${value}`;
@@ -53,17 +33,11 @@ async function createUrlOnSubmit (event:any, form:JQuery<HTMLElement>):Promise<v
         const url = generateAPIUrl(formData)
         localStorage["API_URL"] = url;
         console.log(url);
-
-
-
-        
 }
 
 
-
-
 const attachFormEventHandlers = () => {
-    const form = $("form");
+    const form = $("#params-form");
     const dialog = document.querySelector("#question-dialog") as HTMLDialogElement;
 
     form.on("submit", (event) => createUrlOnSubmit(event, form))
@@ -81,11 +55,5 @@ const attachFormEventHandlers = () => {
 
 
 
-
-
-
-
-
 populateCategoryDropdown();
 attachFormEventHandlers();
-

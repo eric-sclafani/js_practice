@@ -22,8 +22,27 @@ const storeCategoryData = (data:Category[]) => {
     localStorage["IDs"] = JSON.stringify(IDs);
 }
 
-export async function parseCategoryData():Promise<void> {
+async function parseCategoryData():Promise<void> {
     const categories = await fetchAllCategories("https://opentdb.com/api_category.php");
     const data = categories["trivia_categories"];
     storeCategoryData(data);
+}
+
+
+export async function populateCategoryDropdown ():Promise<void>{
+    await parseCategoryData();
+    const categoryDropdown = $("select[name='category']");
+
+    const categoryNames:string[] = JSON.parse(localStorage.names);
+    const categoryIDs:number[] = JSON.parse(localStorage.IDs);
+
+    for (const name of categoryNames) {
+        const option = document.createElement("option");
+        option.innerText = name;
+        option.className = "category-selection";
+
+        const value = categoryIDs[categoryNames.indexOf(name)].toString();
+        option.value = value;
+        categoryDropdown.append(option)
+    } 
 }

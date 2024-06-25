@@ -7,4 +7,5 @@ cd ../$1
 touch README.md && echo "# Project" > README.md
 mkdir src
 cd src
+mkdir dist
 touch index.ts index.html style.css
