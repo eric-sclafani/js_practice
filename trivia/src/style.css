@@ -255,3 +255,18 @@ footer {
     padding:15px;
 
 }
+
+#questions-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.answers-wrapper{
+    display:flex;
+    flex-direction:column;
+}
+
+.question-label {
+    display: inline-flex;
+    align-items:center;
+}

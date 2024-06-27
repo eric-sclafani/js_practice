@@ -12,7 +12,7 @@ interface QuestionsResponse {
     results: Question[];
 }
 
-async function fetchQuestions(url:string):Promise<QuestionsResponse>{
+export async function fetchQuestions(url:string):Promise<QuestionsResponse>{
     const data = await fetch(url);
     return await data.json();
 }
@@ -35,28 +35,38 @@ const shuffleAnswers = (array:string[]):string[] => {
 const createQuestionDiv = (question:Question):HTMLDivElement => {
     let questionAnswers = shuffleAnswers([question.correct_answer, ...question.incorrect_answers]);
 
-    const wrapper = document.createElement("div");
-    wrapper.className = "question-wrapper";
+    const questionWrapper = document.createElement("div");
+    questionWrapper.className = "question-wrapper";
+
+    const answersWrapper = document.createElement("div");
+    answersWrapper.className = "answers-wrapper";
+
+    const questionText = document.createElement("h2");
+    questionText.className = "question-text";
+    questionText.innerText = question.question;
+    questionWrapper.appendChild(questionText);
 
     for (const answer of questionAnswers){
 
         const input = document.createElement("input");
         input.setAttribute("type", "radio");
         input.setAttribute("name", "answer");
-        input.className = "answer";
+        input.id = answer
         input.value = answer;
 
         const label = document.createElement("label");
-        label.setAttribute("for", "answer");
+        label.setAttribute("for", answer);
+        label.innerText = answer;
+        label.className = "question-label";
+        label.prepend(input);
 
-        wrapper.prepend(input);
-        wrapper.prepend(label);
+        answersWrapper.append(label);
         
     }
-
-    return wrapper;
+    questionWrapper.appendChild(answersWrapper)
+    return questionWrapper
+}
     
-
 const createAllQuestions = (questions:QuestionsResponse): HTMLDivElement[] => {
     const allQuestionDivs:HTMLDivElement[] = [];
     const data = questions.results;
@@ -66,15 +76,24 @@ const createAllQuestions = (questions:QuestionsResponse): HTMLDivElement[] => {
         allQuestionDivs.push(htmlDiv);
     }
     return allQuestionDivs;
-
 }
 
 
-
-
+export const questionLoader = (response:QuestionsResponse):Function => {
+    const questions = createAllQuestions(response);
+    let currentQuestionIndex = 0;
     
-
-
+    return function():HTMLDivElement | null{
+        const currentQuestion = questions[currentQuestionIndex]
+        if (currentQuestion){
+            currentQuestionIndex++
+            return currentQuestion;
+        } 
+        else { 
+            return null
+        };
+    
+        
+        
+    }
 }
-
-

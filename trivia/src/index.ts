@@ -1,4 +1,5 @@
 import { populateCategoryDropdown } from "./categories.js"
+import { questionLoader, fetchQuestions } from "./questions.js";
 
 const getAmount = (value:string):string => {
     return `amount=${value}`;
@@ -27,29 +28,38 @@ const generateAPIUrl = (formData:JQuery.NameValuePair[]) => {
     return url;
 }
 
-async function createUrlOnSubmit (event:any, form:JQuery<HTMLElement>):Promise<void>  {
+const createUrlOnSubmit = (event:any, form:JQuery<HTMLElement>):string => {
     event.preventDefault();
-        const formData = form.serializeArray();
-        const url = generateAPIUrl(formData)
-        localStorage["API_URL"] = url;
-        console.log(url);
+    const formData = form.serializeArray();
+    const url = generateAPIUrl(formData)
+    return url;
+}
+
+async function showQuestionsModal(event:any, paramsForm:JQuery<HTMLElement>, dialog:HTMLDialogElement) {
+    event.preventDefault();
+    const url = createUrlOnSubmit(event, paramsForm)
+    const questionReponse = await fetchQuestions(url);
+    const loadQuestion = questionLoader(questionReponse);
+    
+    $("#question-form").prepend(loadQuestion())
+    
+
+    dialog.showModal();
+
 }
 
 
-const attachFormEventHandlers = () => {
+function attachFormEventHandlers() {
     const form = $("#params-form");
     const dialog = document.querySelector("#question-dialog") as HTMLDialogElement;
 
-    form.on("submit", (event) => createUrlOnSubmit(event, form))
+    form.on("submit", (event) => showQuestionsModal(event, form, dialog))
 
-    form.on("submit", (event) => {
-        event.preventDefault();
-        dialog.showModal();
-    })
-
+  
     $("#quit-dialog").on("click", () => {
         dialog.close();
     })
+
 }
 
 
