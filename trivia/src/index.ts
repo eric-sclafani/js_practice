@@ -1,5 +1,5 @@
 import { populateCategoryDropdown } from "./categories.js"
-import { questionLoader, fetchQuestions } from "./questions.js";
+import { QuestionLoader } from "./questions.js";
 
 const getAmount = (value:string):string => {
     return `amount=${value}`;
@@ -35,26 +35,39 @@ const createUrlOnSubmit = (event:any, form:JQuery<HTMLElement>):string => {
     return url;
 }
 
-async function showQuestionsModal(event:any, paramsForm:JQuery<HTMLElement>, dialog:HTMLDialogElement) {
-    event.preventDefault();
-    const url = createUrlOnSubmit(event, paramsForm)
-    const questionReponse = await fetchQuestions(url);
-    const loadQuestion = questionLoader(questionReponse);
+
     
-    $("#question-form").prepend(loadQuestion())
+    // await qLoader.fetchQuestions();
+    // return qLoader;
     
 
-    dialog.showModal();
+    
+    
+    // const questionReponse = await fetchQuestions(url);
+    // const loadQuestion = questionLoader(questionReponse);
+    //$("#question-form").prepend(loadQuestion())
+    
 
-}
 
-
-function attachFormEventHandlers() {
+async function attachButtonEventHandlers() {
     const form = $("#params-form");
     const dialog = document.querySelector("#question-dialog") as HTMLDialogElement;
+    const qLoader = new QuestionLoader(); 
 
-    form.on("submit", (event) => showQuestionsModal(event, form, dialog))
+    form.on("submit", async function(event){
 
+        event.preventDefault();
+        const url = createUrlOnSubmit(event, form);
+        // await qLoader.loadAllQuestions(url);
+
+        
+        
+        dialog.showModal();
+    })
+
+    $("#next-question").on("click", () => {
+
+    })
   
     $("#quit-dialog").on("click", () => {
         dialog.close();
@@ -62,8 +75,12 @@ function attachFormEventHandlers() {
 
 }
 
-
+// user presses next:
+    // increment question index
+    // keep track of user answer and see if its correct
+    // wipe the previous question's HTML and next question HTML
+    // if last question, next button will say finish
 
 
 populateCategoryDropdown();
-attachFormEventHandlers();
+attachButtonEventHandlers();
