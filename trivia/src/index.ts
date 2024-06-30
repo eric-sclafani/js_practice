@@ -35,20 +35,6 @@ const createUrlOnSubmit = (event:any, form:JQuery<HTMLElement>):string => {
     return url;
 }
 
-
-    
-    // await qLoader.fetchQuestions();
-    // return qLoader;
-    
-
-    
-    
-    // const questionReponse = await fetchQuestions(url);
-    // const loadQuestion = questionLoader(questionReponse);
-    //$("#question-form").prepend(loadQuestion())
-    
-
-
 async function attachButtonEventHandlers() {
     const form = $("#params-form");
     const dialog = document.querySelector("#question-dialog") as HTMLDialogElement;
@@ -58,10 +44,11 @@ async function attachButtonEventHandlers() {
 
         event.preventDefault();
         const url = createUrlOnSubmit(event, form);
-        // await qLoader.loadAllQuestions(url);
+        await qLoader.prepareAllQuestions(url);
+        console.log(qLoader.loadNextQuestion())
+        console.log(qLoader.loadNextQuestion())
+        $("#question-form").prepend()
 
-        
-        
         dialog.showModal();
     })
 

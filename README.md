@@ -10,7 +10,7 @@ This repo contains small practice Javascript/Typescript projects
 
 ### Project 4: Trivia App with [this api](https://opentdb.com/api_config.php) 
 
-### Project 5: Blogging App
+### Project 5: Text data analyzer
 
 ### Project 6: 
 
