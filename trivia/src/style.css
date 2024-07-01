@@ -238,6 +238,11 @@ body {
     box-shadow:none;
 }
 
+#submit:disabled{
+    opacity:.3;
+    cursor:not-allowed
+}
+
 .questions-param-form {
     display:flex;
     flex-direction:column;

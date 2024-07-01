@@ -20,8 +20,10 @@ export class QuestionLoader {
     }
 
     public loadNextQuestion():HTMLDivElement|null {
-        const currentQuestion = this.questionDivs[this.index]; 
 
+        this.removePreviousQuestionIfExists();        
+
+        const currentQuestion = this.questionDivs[this.index]; 
         if (currentQuestion){
             this.index++
             return currentQuestion;
@@ -33,6 +35,12 @@ export class QuestionLoader {
     public async prepareAllQuestions(url:string): Promise<void>{
         const questions = await this.fetchQuestions(url);
         this.questionDivs = this.createAllQuestions(questions);
+    }
+
+    private removePreviousQuestionIfExists():void {
+        if ($(".question-wrapper").html()){
+            $(".question-wrapper").html("") 
+        }
     }
 
     private async fetchQuestions(url:string):Promise<Question[]> {
@@ -77,6 +85,7 @@ export class QuestionLoader {
             input.setAttribute("name", "answer");
             input.id = answer
             input.value = answer;
+            input.required = true;
     
             const label = document.createElement("label");
             label.setAttribute("for", answer);
@@ -106,11 +115,3 @@ export class QuestionLoader {
     
 
 }
-
-
-
-
-    
-
-
-

@@ -35,24 +35,37 @@ const createUrlOnSubmit = (event:any, form:JQuery<HTMLElement>):string => {
     return url;
 }
 
+const tempDisableFormSubmit = () => {
+    const button = $("#submit");
+    button.prop('disabled', true);
+
+    setTimeout(
+        () => button.prop("disabled", false),
+        6500
+    )
+}
+
 async function attachButtonEventHandlers() {
-    const form = $("#params-form");
+    const paramsForm = $("#params-form");
     const dialog = document.querySelector("#question-dialog") as HTMLDialogElement;
     const qLoader = new QuestionLoader(); 
+    const questionForm = $("#question-form");
 
-    form.on("submit", async function(event){
-
+    paramsForm.on("submit", async function(event){
         event.preventDefault();
-        const url = createUrlOnSubmit(event, form);
+        
+        const url = createUrlOnSubmit(event, paramsForm);
         await qLoader.prepareAllQuestions(url);
-        console.log(qLoader.loadNextQuestion())
-        console.log(qLoader.loadNextQuestion())
-        $("#question-form").prepend()
+        questionForm.prepend(qLoader.loadNextQuestion() as HTMLDivElement)
 
         dialog.showModal();
+        tempDisableFormSubmit();
     })
 
-    $("#next-question").on("click", () => {
+    // next button
+    questionForm.on("submit", (event) => {
+        event.preventDefault();
+        questionForm.prepend(qLoader.loadNextQuestion() as HTMLDivElement)
 
     })
   
@@ -62,11 +75,6 @@ async function attachButtonEventHandlers() {
 
 }
 
-// user presses next:
-    // increment question index
-    // keep track of user answer and see if its correct
-    // wipe the previous question's HTML and next question HTML
-    // if last question, next button will say finish
 
 
 populateCategoryDropdown();
