@@ -11,29 +11,35 @@ interface Question {
 export class QuestionLoader {
 
     private questionDivs:HTMLDivElement[];
+    private questions:Question[];
     private index:number;
     
     constructor(){ 
         this.questionDivs = [];
-        this.index = 0;
-        
+        this.questions = [];
+        this.index = 0; 
     }
 
     public loadNextQuestion():HTMLDivElement|null {
 
         this.removePreviousQuestionIfExists();        
 
-        const currentQuestion = this.questionDivs[this.index]; 
-        if (currentQuestion){
+        const currentQuestionDiv = this.questionDivs[this.index]; 
+        if (currentQuestionDiv){
             this.index++
-            return currentQuestion;
+            return currentQuestionDiv;
         }
         else { return null }
-        
+    }
+
+    public get currentQuestionAnswer():string{
+        const currentQuestion = this.questions[this.index]; 
+        return currentQuestion.correct_answer
     }
 
     public async prepareAllQuestions(url:string): Promise<void>{
         const questions = await this.fetchQuestions(url);
+        this.questions = questions;
         this.questionDivs = this.createAllQuestions(questions);
     }
 

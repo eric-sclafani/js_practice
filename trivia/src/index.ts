@@ -37,10 +37,16 @@ const createUrlOnSubmit = (event:any, form:JQuery<HTMLElement>):string => {
 
 const tempDisableFormSubmit = () => {
     const button = $("#submit");
-    button.prop('disabled', true);
+    button
+        .prop('disabled', true)
+        .prop("title", "Submit button is disabled for 6.5 seconds to reset API call");
 
     setTimeout(
-        () => button.prop("disabled", false),
+        () => { 
+            button
+                .prop("disabled", false)
+                .prop("title", "");
+        },
         6500
     )
 }
@@ -56,7 +62,9 @@ async function attachButtonEventHandlers() {
         
         const url = createUrlOnSubmit(event, paramsForm);
         await qLoader.prepareAllQuestions(url);
-        questionForm.prepend(qLoader.loadNextQuestion() as HTMLDivElement)
+
+        const firstQuestion = qLoader.loadNextQuestion();
+        questionForm.prepend(firstQuestion as HTMLDivElement)
 
         dialog.showModal();
         tempDisableFormSubmit();
@@ -65,7 +73,16 @@ async function attachButtonEventHandlers() {
     // next button
     questionForm.on("submit", (event) => {
         event.preventDefault();
-        questionForm.prepend(qLoader.loadNextQuestion() as HTMLDivElement)
+
+        // get user's answer and store it
+
+        
+        const nextQuestion = qLoader.loadNextQuestion();
+
+        if (nextQuestion){
+            questionForm.prepend(nextQuestion as HTMLDivElement);
+        }
+        
 
     })
   
@@ -75,6 +92,9 @@ async function attachButtonEventHandlers() {
 
 }
 
+// when Qs are created, save correct answers to local storage
+// everytime user answers question, save that to same local storage
+// at the end, see how many questions user guessed correctly
 
 
 populateCategoryDropdown();
