@@ -63,6 +63,9 @@ async function attachButtonEventHandlers() {
         const url = createUrlOnSubmit(event, paramsForm);
         await qLoader.prepareAllQuestions(url);
 
+        console.log(qLoader.viewAllQuestions)
+        
+
         const firstQuestion = qLoader.loadNextQuestion();
         questionForm.prepend(firstQuestion as HTMLDivElement)
 

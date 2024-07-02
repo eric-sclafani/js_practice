@@ -1,46 +1,63 @@
 
-interface Question {
-    category:string;
-    correct_answer:string;
-    difficulty:string;
-    incorrect_answers: string[];
-    question:string;
-    type:string; 
+class Question {
+    private correct_answer:string;
+    private incorrect_answers: string[];
+    private question:string;
+    public questionDiv!:HTMLDivElement;
+
+    constructor(correct_answer:string, incorrect_answers:string[], question:string) {
+        this.correct_answer = correct_answer;
+        this.incorrect_answers = incorrect_answers;
+        this.question = question;
+    }
+
+    get correctAnswer():string {
+        return this.correct_answer
+    }
+
+    get incorrectAnswers():string[] {
+        return this.incorrect_answers;
+    }
+
+    get questionText():string{
+        return this.question
+    }
 }
 
 export class QuestionLoader {
 
-    private questionDivs:HTMLDivElement[];
     private questions:Question[];
     private index:number;
+    private currentQuestion!:Question;
     
     constructor(){ 
-        this.questionDivs = [];
         this.questions = [];
         this.index = 0; 
     }
 
-    public loadNextQuestion():HTMLDivElement|null {
+    get viewAllQuestions(){
+        return this.questions;
+    }
+
+    public loadNextQuestion():void {
 
         this.removePreviousQuestionIfExists();        
 
-        const currentQuestionDiv = this.questionDivs[this.index]; 
-        if (currentQuestionDiv){
-            this.index++
-            return currentQuestionDiv;
-        }
-        else { return null }
-    }
-
-    public get currentQuestionAnswer():string{
         const currentQuestion = this.questions[this.index]; 
-        return currentQuestion.correct_answer
+        if (currentQuestion){
+            this.index++
+            this.currentQuestion = currentQuestion;
+        }
+
     }
 
     public async prepareAllQuestions(url:string): Promise<void>{
         const questions = await this.fetchQuestions(url);
+        for (const question of questions){
+            const div = this.createQuestionDiv(question);
+            question.questionDiv = div;
+        }
         this.questions = questions;
-        this.questionDivs = this.createAllQuestions(questions);
     }
 
     private removePreviousQuestionIfExists():void {
@@ -51,8 +68,21 @@ export class QuestionLoader {
 
     private async fetchQuestions(url:string):Promise<Question[]> {
         const response = (await fetch(url)).json();
-        const results = await response;
-        return results["results"];
+        const responseData = await response;
+
+        const questions :Question[] = [];
+        const results = responseData["results"];
+
+        for (const result of results){
+            questions.push(
+                new Question(
+                    result.correct_answer,
+                    result.incorrect_answers,
+                    result.question
+                )   
+            )
+        }
+        return questions;
     }
 
     private shuffleAnswers (array:string[]):string[] {
@@ -71,7 +101,7 @@ export class QuestionLoader {
     }
     
     private createQuestionDiv (question:Question):HTMLDivElement {
-        let questionAnswers = this.shuffleAnswers([question.correct_answer, ...question.incorrect_answers]);
+        let questionAnswers = this.shuffleAnswers([question.correctAnswer, ...question.incorrectAnswers]);
     
         const questionWrapper = document.createElement("div");
         questionWrapper.className = "question-wrapper";
@@ -81,7 +111,7 @@ export class QuestionLoader {
     
         const questionText = document.createElement("h2");
         questionText.className = "question-text";
-        questionText.innerText = question.question;
+        questionText.innerText = question.questionText;
         questionWrapper.appendChild(questionText);
     
         for (const answer of questionAnswers){
@@ -105,19 +135,4 @@ export class QuestionLoader {
         questionWrapper.appendChild(answersWrapper)
         return questionWrapper
     }
-
-    private createAllQuestions = (data:Question[]): HTMLDivElement[] => {
-        const allQuestionDivs:HTMLDivElement[] = [];
-
-        for (const question of data){
-            const htmlDiv = this.createQuestionDiv(question);
-            allQuestionDivs.push(htmlDiv);
-        }
-        return allQuestionDivs;
-    }
-
-   
-
-    
-
 }
