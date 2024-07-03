@@ -57,17 +57,26 @@ async function attachButtonEventHandlers() {
     const qLoader = new QuestionLoader(); 
     const questionForm = $("#question-form");
 
+    // when use closes by pressing Esc, ensure qLoader is reset
+    document.addEventListener("keydown", (event) => {
+        if (event.key === 'Escape' && dialog.open) {
+            event.preventDefault();
+            qLoader.resetIndex();
+            dialog.close();
+        }
+    })
+
     paramsForm.on("submit", async function(event){
         event.preventDefault();
-        
+       
+        $("#next-question").html("Next");
         const url = createUrlOnSubmit(event, paramsForm);
         await qLoader.prepareAllQuestions(url);
 
-        console.log(qLoader.viewAllQuestions)
-        
-
-        const firstQuestion = qLoader.loadNextQuestion();
-        questionForm.prepend(firstQuestion as HTMLDivElement)
+        qLoader.loadNextQuestion();
+        const firstQuestion = qLoader.currentQuestion;
+        console.log(qLoader)
+        questionForm.prepend(firstQuestion.questionDiv);
 
         dialog.showModal();
         tempDisableFormSubmit();
@@ -77,28 +86,34 @@ async function attachButtonEventHandlers() {
     questionForm.on("submit", (event) => {
         event.preventDefault();
 
-        // get user's answer and store it
+        if (qLoader.isLastQuestion()){
+            $("#next-question").html("Finish!");
+        } 
+        
+        const userAnswer = questionForm.serializeArray()[0].value; 
+        qLoader.currentQuestion.userAnswer = userAnswer
+
+        console.log(qLoader.currentQuestion.questionText)
+        console.log(qLoader.index)
+        console.log(userAnswer)
+        
+
+        qLoader.loadNextQuestion();
+        const nextQuestion = qLoader.currentQuestion;
+        questionForm.prepend(nextQuestion.questionDiv);
 
         
-        const nextQuestion = qLoader.loadNextQuestion();
-
-        if (nextQuestion){
-            questionForm.prepend(nextQuestion as HTMLDivElement);
-        }
+        
         
 
     })
   
     $("#quit-dialog").on("click", () => {
+        qLoader.resetIndex();
         dialog.close();
     })
 
 }
-
-// when Qs are created, save correct answers to local storage
-// everytime user answers question, save that to same local storage
-// at the end, see how many questions user guessed correctly
-
 
 populateCategoryDropdown();
 attachButtonEventHandlers();

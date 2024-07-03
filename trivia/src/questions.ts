@@ -1,63 +1,83 @@
 
 class Question {
-    private correct_answer:string;
-    private incorrect_answers: string[];
+    private _correctAnswer:string;
+    private _incorrectAnswers: string[];
     private question:string;
+
     public questionDiv!:HTMLDivElement;
+    public userAnswer!:string;
 
     constructor(correct_answer:string, incorrect_answers:string[], question:string) {
-        this.correct_answer = correct_answer;
-        this.incorrect_answers = incorrect_answers;
+        this._correctAnswer = correct_answer;
+        this._incorrectAnswers = incorrect_answers;
         this.question = question;
     }
 
     get correctAnswer():string {
-        return this.correct_answer
+        return this._correctAnswer
     }
 
     get incorrectAnswers():string[] {
-        return this.incorrect_answers;
+        return this._incorrectAnswers;
     }
 
     get questionText():string{
         return this.question
     }
+
 }
 
 export class QuestionLoader {
 
-    private questions:Question[];
-    private index:number;
-    private currentQuestion!:Question;
+    private _questions:Question[];
+    private _currentQuestion!:Question;
+    private _index:number;
     
     constructor(){ 
-        this.questions = [];
-        this.index = 0; 
+        this._questions = [];
+        this._index = 0; 
     }
 
-    get viewAllQuestions(){
-        return this.questions;
+    get questions():Question[]{
+        return this._questions;
+    }
+
+    get currentQuestion():Question{
+        return this._currentQuestion;
+    }
+
+    get index():number{
+        return this._index;
+    }
+
+    public isLastQuestion():boolean {
+        return this._index+1 == this._questions.length;
+    }
+
+    public resetIndex():void {
+        this._index = 0;
     }
 
     public loadNextQuestion():void {
 
         this.removePreviousQuestionIfExists();        
 
-        const currentQuestion = this.questions[this.index]; 
+        const currentQuestion = this._questions[this._index]; 
         if (currentQuestion){
-            this.index++
-            this.currentQuestion = currentQuestion;
+            this._index++
+            this._currentQuestion = currentQuestion;
         }
-
     }
 
     public async prepareAllQuestions(url:string): Promise<void>{
         const questions = await this.fetchQuestions(url);
+        let counter = 0;
         for (const question of questions){
-            const div = this.createQuestionDiv(question);
+            const div = this.createQuestionDiv(question, counter);
             question.questionDiv = div;
+            counter++
         }
-        this.questions = questions;
+        this._questions = questions;
     }
 
     private removePreviousQuestionIfExists():void {
@@ -100,7 +120,7 @@ export class QuestionLoader {
         return shuffledArr;
     }
     
-    private createQuestionDiv (question:Question):HTMLDivElement {
+    private createQuestionDiv (question:Question, count:number):HTMLDivElement {
         let questionAnswers = this.shuffleAnswers([question.correctAnswer, ...question.incorrectAnswers]);
     
         const questionWrapper = document.createElement("div");
@@ -111,7 +131,7 @@ export class QuestionLoader {
     
         const questionText = document.createElement("h2");
         questionText.className = "question-text";
-        questionText.innerText = question.questionText;
+        questionText.innerText = `${count+1}. ${question.questionText}`;
         questionWrapper.appendChild(questionText);
     
         for (const answer of questionAnswers){
