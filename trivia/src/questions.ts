@@ -1,28 +1,16 @@
 
 class Question {
-    private _correctAnswer:string;
-    private _incorrectAnswers: string[];
-    private question:string;
+    public correctAnswer:string;
+    public incorrectAnswers: string[];
+    public questionText:string;
 
     public questionDiv!:HTMLDivElement;
     public userAnswer!:string;
 
     constructor(correct_answer:string, incorrect_answers:string[], question:string) {
-        this._correctAnswer = correct_answer;
-        this._incorrectAnswers = incorrect_answers;
-        this.question = question;
-    }
-
-    get correctAnswer():string {
-        return this._correctAnswer
-    }
-
-    get incorrectAnswers():string[] {
-        return this._incorrectAnswers;
-    }
-
-    get questionText():string{
-        return this.question
+        this.correctAnswer = correct_answer;
+        this.incorrectAnswers = incorrect_answers;
+        this.questionText = question;
     }
 
 }
@@ -72,7 +60,9 @@ export class QuestionLoader {
     public async prepareAllQuestions(url:string): Promise<void>{
         const questions = await this.fetchQuestions(url);
         let counter = 0;
-        for (const question of questions){
+        for (let question of questions){
+            question = this.processText(question);
+
             const div = this.createQuestionDiv(question, counter);
             question.questionDiv = div;
             counter++
@@ -84,6 +74,17 @@ export class QuestionLoader {
         if ($(".question-wrapper").html()){
             $(".question-wrapper").html("") 
         }
+    }
+
+    private processText(question:Question):Question{
+       const cleanText = (text:string) => {
+        return text.replaceAll("&#039;", "'").replaceAll("&quot;", "\"");
+       }
+       question.questionText = cleanText(question.questionText);
+       question.correctAnswer = cleanText(question.correctAnswer);
+       question.incorrectAnswers = question.incorrectAnswers.map((x) => cleanText(x))
+       return question;
+       
     }
 
     private async fetchQuestions(url:string):Promise<Question[]> {

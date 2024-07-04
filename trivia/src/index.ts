@@ -39,15 +39,15 @@ const tempDisableFormSubmit = () => {
     const button = $("#submit");
     button
         .prop('disabled', true)
-        .prop("title", "Submit button is disabled for 6.5 seconds to reset API call");
+        .prop("title", "Submit button is disabled for 5 seconds to reset API call");
 
     setTimeout(
-        () => { 
+        () => {     
             button
                 .prop("disabled", false)
                 .prop("title", "");
         },
-        6500
+        5000
     )
 }
 
@@ -72,10 +72,9 @@ async function attachButtonEventHandlers() {
         $("#next-question").html("Next");
         const url = createUrlOnSubmit(event, paramsForm);
         await qLoader.prepareAllQuestions(url);
-
+        console.log(qLoader.questions)
         qLoader.loadNextQuestion();
         const firstQuestion = qLoader.currentQuestion;
-        console.log(qLoader)
         questionForm.prepend(firstQuestion.questionDiv);
 
         dialog.showModal();
@@ -93,17 +92,11 @@ async function attachButtonEventHandlers() {
         const userAnswer = questionForm.serializeArray()[0].value; 
         qLoader.currentQuestion.userAnswer = userAnswer
 
-        console.log(qLoader.currentQuestion.questionText)
-        console.log(qLoader.index)
-        console.log(userAnswer)
-        
-
         qLoader.loadNextQuestion();
         const nextQuestion = qLoader.currentQuestion;
         questionForm.prepend(nextQuestion.questionDiv);
 
-        
-        
+    
         
 
     })
