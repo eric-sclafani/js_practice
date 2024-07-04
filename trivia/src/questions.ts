@@ -12,7 +12,6 @@ class Question {
         this.incorrectAnswers = incorrect_answers;
         this.questionText = question;
     }
-
 }
 
 export class QuestionLoader {
@@ -20,6 +19,7 @@ export class QuestionLoader {
     private _questions:Question[];
     private _currentQuestion!:Question;
     private _index:number;
+
     
     constructor(){ 
         this._questions = [];
@@ -42,14 +42,15 @@ export class QuestionLoader {
         return this._index+1 == this._questions.length;
     }
 
+    public questionnaireIsOver():boolean {
+        return this._index == this._questions.length;
+    }
+
     public resetIndex():void {
         this._index = 0;
     }
 
     public loadNextQuestion():void {
-
-        this.removePreviousQuestionIfExists();        
-
         const currentQuestion = this._questions[this._index]; 
         if (currentQuestion){
             this._index++
@@ -70,7 +71,37 @@ export class QuestionLoader {
         this._questions = questions;
     }
 
-    private removePreviousQuestionIfExists():void {
+    public scoreScreen():HTMLDivElement {
+        const score = this.getScore();
+
+        const scoreWrapper = document.createElement("div");
+        scoreWrapper.id = "score-wrapper";
+
+        const calculation = (score.userCorrect / score.maxCorrect)*100;
+        scoreWrapper.innerHTML = `<h2>Score: ${Math.round(calculation)}%</h2>`;
+
+        const scoreDiv = document.createElement("div");
+        scoreDiv.innerText = `You got ${score.userCorrect} out of ${score.maxCorrect} correct`;
+
+        scoreWrapper.appendChild(scoreDiv);
+        return scoreWrapper;
+        
+    }
+
+    private getScore():{userCorrect:number, maxCorrect:number}{
+        let userCorrect = 0
+        const maxCorrect = this.questions.length;
+
+        for (const question of this.questions){
+            if(question.userAnswer == question.correctAnswer){
+                userCorrect++
+            }
+        }
+        return {userCorrect, maxCorrect}
+
+    }
+
+    public removePreviousQuestionIfExists():void {
         if ($(".question-wrapper").html()){
             $(".question-wrapper").html("") 
         }

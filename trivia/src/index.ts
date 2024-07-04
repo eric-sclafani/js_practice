@@ -68,12 +68,17 @@ async function attachButtonEventHandlers() {
 
     paramsForm.on("submit", async function(event){
         event.preventDefault();
-       
+
+        $("#next-question").show();
         $("#next-question").html("Next");
+        $("#score-wrapper").html("");
+
         const url = createUrlOnSubmit(event, paramsForm);
         await qLoader.prepareAllQuestions(url);
-        console.log(qLoader.questions)
+
+        qLoader.removePreviousQuestionIfExists(); 
         qLoader.loadNextQuestion();
+
         const firstQuestion = qLoader.currentQuestion;
         questionForm.prepend(firstQuestion.questionDiv);
 
@@ -85,20 +90,30 @@ async function attachButtonEventHandlers() {
     questionForm.on("submit", (event) => {
         event.preventDefault();
 
+
+
         if (qLoader.isLastQuestion()){
             $("#next-question").html("Finish!");
         } 
+
+        if (qLoader.questionnaireIsOver()){
+            $("#next-question").hide();
+            
+            qLoader.removePreviousQuestionIfExists();
+            questionForm.prepend(qLoader.scoreScreen());
+
+        }
+        else {
+            const userAnswer = questionForm.serializeArray()[0].value; 
+            qLoader.currentQuestion.userAnswer = userAnswer
+
+            qLoader.removePreviousQuestionIfExists(); 
+            qLoader.loadNextQuestion();
+            const nextQuestion = qLoader.currentQuestion;
+            questionForm.prepend(nextQuestion.questionDiv);
+        }
         
-        const userAnswer = questionForm.serializeArray()[0].value; 
-        qLoader.currentQuestion.userAnswer = userAnswer
-
-        qLoader.loadNextQuestion();
-        const nextQuestion = qLoader.currentQuestion;
-        questionForm.prepend(nextQuestion.questionDiv);
-
-    
         
-
     })
   
     $("#quit-dialog").on("click", () => {
