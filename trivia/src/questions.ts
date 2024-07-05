@@ -16,9 +16,11 @@ class Question {
 
 export class QuestionLoader {
 
-    private _questions:Question[];
+    private _questions:Question[] | null;
     private _currentQuestion!:Question;
     private _index:number;
+
+    private resonseSuccessful!:boolean
 
     
     constructor(){ 
@@ -27,7 +29,7 @@ export class QuestionLoader {
     }
 
     get questions():Question[]{
-        return this._questions;
+        return this._questions!;
     }
 
     get currentQuestion():Question{
@@ -39,19 +41,20 @@ export class QuestionLoader {
     }
 
     public isLastQuestion():boolean {
-        return this._index+1 == this._questions.length;
+        return this._index+1 == this._questions?.length;
     }
 
     public questionnaireIsOver():boolean {
-        return this._index == this._questions.length;
+        return this._index == this._questions?.length;
     }
 
-    public resetIndex():void {
+    public reset():void {
         this._index = 0;
+        this._questions = [];
     }
 
     public loadNextQuestion():void {
-        const currentQuestion = this._questions[this._index]; 
+        const currentQuestion = this._questions![this._index];
         if (currentQuestion){
             this._index++
             this._currentQuestion = currentQuestion;
@@ -59,9 +62,10 @@ export class QuestionLoader {
     }
 
     public async prepareAllQuestions(url:string): Promise<void>{
+
         const questions = await this.fetchQuestions(url);
         let counter = 0;
-        for (let question of questions){
+        for (let question of questions!){
             question = this.processText(question);
 
             const div = this.createQuestionDiv(question, counter);
@@ -109,7 +113,9 @@ export class QuestionLoader {
 
     private processText(question:Question):Question{
        const cleanText = (text:string) => {
-        return text.replaceAll("&#039;", "'").replaceAll("&quot;", "\"");
+        return text.replaceAll("&#039;", "'")
+                   .replaceAll("&quot;", "\"")
+                   .replaceAll("&prime","'");
        }
        question.questionText = cleanText(question.questionText);
        question.correctAnswer = cleanText(question.correctAnswer);
@@ -118,23 +124,30 @@ export class QuestionLoader {
        
     }
 
-    private async fetchQuestions(url:string):Promise<Question[]> {
+    private async fetchQuestions(url:string):Promise<Question[] | null> {
+
         const response = (await fetch(url)).json();
         const responseData = await response;
-
-        const questions :Question[] = [];
-        const results = responseData["results"];
-
-        for (const result of results){
-            questions.push(
-                new Question(
-                    result.correct_answer,
-                    result.incorrect_answers,
-                    result.question
-                )   
-            )
+        
+        if (responseData.response_code == 1){
+            alert("Not enough questions found for this category. Reduce number of questions or change the category to proceed");
+            return null;
         }
-        return questions;
+        else {
+            const questions :Question[] = [];
+            const results = responseData["results"];
+    
+            for (const result of results){
+                questions.push(
+                    new Question(
+                        result.correct_answer,
+                        result.incorrect_answers,
+                        result.question
+                    )   
+                )
+            }
+            return questions;
+        }
     }
 
     private shuffleAnswers (array:string[]):string[] {

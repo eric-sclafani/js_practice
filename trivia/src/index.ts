@@ -61,13 +61,14 @@ async function attachButtonEventHandlers() {
     document.addEventListener("keydown", (event) => {
         if (event.key === 'Escape' && dialog.open) {
             event.preventDefault();
-            qLoader.resetIndex();
+            qLoader.reset();
             dialog.close();
         }
     })
 
     paramsForm.on("submit", async function(event){
         event.preventDefault();
+        tempDisableFormSubmit();
 
         $("#next-question").show();
         $("#next-question").html("Next");
@@ -75,22 +76,20 @@ async function attachButtonEventHandlers() {
 
         const url = createUrlOnSubmit(event, paramsForm);
         await qLoader.prepareAllQuestions(url);
-
-        qLoader.removePreviousQuestionIfExists(); 
+        console.log(qLoader.questions)
+       
+        qLoader.removePreviousQuestionIfExists();
         qLoader.loadNextQuestion();
 
         const firstQuestion = qLoader.currentQuestion;
         questionForm.prepend(firstQuestion.questionDiv);
 
         dialog.showModal();
-        tempDisableFormSubmit();
     })
 
     // next button
     questionForm.on("submit", (event) => {
         event.preventDefault();
-
-
 
         if (qLoader.isLastQuestion()){
             $("#next-question").html("Finish!");
@@ -117,7 +116,7 @@ async function attachButtonEventHandlers() {
     })
   
     $("#quit-dialog").on("click", () => {
-        qLoader.resetIndex();
+        qLoader.reset();
         dialog.close();
     })
 
