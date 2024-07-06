@@ -116,6 +116,7 @@ async function attachButtonEventHandlers() {
     })
   
     $("#quit-dialog").on("click", () => {
+        qLoader.removePreviousQuestionIfExists(); 
         qLoader.reset();
         dialog.close();
     })

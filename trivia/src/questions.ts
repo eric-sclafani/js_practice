@@ -19,9 +19,6 @@ export class QuestionLoader {
     private _questions:Question[] | null;
     private _currentQuestion!:Question;
     private _index:number;
-
-    private resonseSuccessful!:boolean
-
     
     constructor(){ 
         this._questions = [];
@@ -107,7 +104,7 @@ export class QuestionLoader {
 
     public removePreviousQuestionIfExists():void {
         if ($(".question-wrapper").html()){
-            $(".question-wrapper").html("") 
+            $(".question-wrapper").remove();
         }
     }
 

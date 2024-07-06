@@ -258,7 +258,23 @@ footer {
     border:solid white;
     border-radius:20px;
     padding:15px;
+}
 
+
+
+
+/* Modal styles */
+
+#question-dialog {
+    width:100vw;
+    border:groove;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    background-color:transparent
+
+}
+
+#question-dialog::backdrop {
+    backdrop-filter: blur(7px);
 }
 
 #questions-form {
@@ -267,10 +283,44 @@ footer {
 }
 
 .answers-wrapper{
-    display:flex;
+    display:inline-flex;
     flex-direction:column;
+    gap:8px;
+}
+
+.question-text {
+    color:white;
+    text-shadow: black 1px 0 10px; 
 }
 
 .question-label {
     display: inline-flex;
+    font-size:1.2rem;
+    color:azure;
+    letter-spacing:1.5px;
+    gap:5px;
 }
+
+input[type=radio]{
+    width:20px;
+}
+
+.question-label:hover {
+    text-shadow: black 1px 0 10px;  
+    border-radius:5px;
+}
+
+#dialog-buttons {
+    margin: 20px 0 20px 0;
+    display:flex;
+    justify-content: space-between;
+}
+
+#dialog-buttons button {
+    width:10vw;
+    height:30px;
+    border:none;
+    border-radius:4px;
+    
+}
+
