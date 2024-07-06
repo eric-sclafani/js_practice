@@ -73,7 +73,9 @@ export class QuestionLoader {
     }
 
     public scoreScreen():HTMLDivElement {
+
         const score = this.getScore();
+        console.log(this.questions);
 
         const scoreWrapper = document.createElement("div");
         scoreWrapper.id = "score-wrapper";
@@ -84,7 +86,8 @@ export class QuestionLoader {
         const scoreDiv = document.createElement("div");
         scoreDiv.innerText = `You got ${score.userCorrect} out of ${score.maxCorrect} correct`;
 
-        scoreWrapper.appendChild(scoreDiv);
+        scoreWrapper.appendChild(scoreDiv); 
+
         return scoreWrapper;
         
     }
@@ -101,6 +104,7 @@ export class QuestionLoader {
         return {userCorrect, maxCorrect}
 
     }
+
 
     public removePreviousQuestionIfExists():void {
         if ($(".question-wrapper").html()){

@@ -76,7 +76,6 @@ async function attachButtonEventHandlers() {
 
         const url = createUrlOnSubmit(event, paramsForm);
         await qLoader.prepareAllQuestions(url);
-        console.log(qLoader.questions)
        
         qLoader.removePreviousQuestionIfExists();
         qLoader.loadNextQuestion();
@@ -97,17 +96,18 @@ async function attachButtonEventHandlers() {
 
         if (qLoader.questionnaireIsOver()){
             $("#next-question").hide();
-            
+ 
             qLoader.removePreviousQuestionIfExists();
             questionForm.prepend(qLoader.scoreScreen());
 
         }
         else {
             const userAnswer = questionForm.serializeArray()[0].value; 
-            qLoader.currentQuestion.userAnswer = userAnswer
+            qLoader.currentQuestion.userAnswer = userAnswer;
 
             qLoader.removePreviousQuestionIfExists(); 
             qLoader.loadNextQuestion();
+
             const nextQuestion = qLoader.currentQuestion;
             questionForm.prepend(nextQuestion.questionDiv);
         }
