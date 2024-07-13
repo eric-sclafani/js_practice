@@ -18,4 +18,4 @@ app.add_middleware(
 
 @app.get("/lower/{text}")
 async def main(text: str):
-    return {"lowered_text": text.lower()}
+    return {"text": text.lower()}

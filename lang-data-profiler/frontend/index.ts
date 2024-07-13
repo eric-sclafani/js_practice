@@ -1,30 +1,41 @@
-interface DataResponse {
-    lowered_text:string;
+import { FastAPIRequest } from "./dataRequest.js"
+
+
+
+const attachFormEventHandler = () => {
+    $("#input-form").on("submit", (event:any) => {
+        event.preventDefault();
+        
+        let form = document.querySelector("#input-form") as HTMLFormElement;
+        const formData = new FormData(form)
+        console.log(formData)
+    })
 }
 
 
 
-class DataRequest {
 
-    data!:DataResponse
 
-    constructor(url:string){
-        this.fetchData(url);
-    }
 
-    private async fetchData(url:string):Promise<void>{
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-              throw new Error(`Response status: ${response.status}`);
-            }
-            const json = await response.json();
-            console.log(json);
-            this.data = json;
-          } catch (error) {
-                console.log(error)
-          }
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+async function main(){
+    const request = new FastAPIRequest("http://localhost:8000/lower/HELLO");
+    await request.fetchData()
+    console.log(request.data.text)
 }
 
-const request = new DataRequest("http://localhost:8000/lower/HELLO");
+
+attachFormEventHandler();
