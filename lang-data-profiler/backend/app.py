@@ -1,5 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
+
+from .nlp import processing as processing
+
 
 app = FastAPI()
 
@@ -14,8 +17,3 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-@app.get("/lower/{text}")
-async def main(text: str):
-    return {"text": text.lower()}
