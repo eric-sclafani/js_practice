@@ -1,7 +1,7 @@
 from fastapi import FastAPI, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 
-from .nlp import processing as processing
+from .nlp.processing import process_document
 
 
 app = FastAPI()
@@ -17,3 +17,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.get("/nlp/")
+async def apply_processing(text: str):
+    doc = process_document(text)
+    return doc.to_json()

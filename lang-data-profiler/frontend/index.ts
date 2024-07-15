@@ -7,20 +7,28 @@ const SAMPLE3 = "Tigers, the largest of all wild cats, are magnificent and power
 
 
 
+async function sendAPIRequest(text:string):Promise<FastAPIRequest> {
+    const request = new FastAPIRequest(`http://localhost:8000/nlp/?text=${text}`);
+    await request.fetchData();
+    return request;
+}
 
 
 
 
 
-const attachFormEventHandler = () => {
+const attachFormEventHandler = (): void => {
 
-
-    $("#input-form").on("submit", function(event:any) {
+    $("#input-form").on("submit", async function(event:any) {
         event.preventDefault();
         
         const formData = $(this).serializeArray();
         $("#inputText").val("");
-        console.log(formData);
+        const inputValue = formData[0].value;
+
+        const request = await sendAPIRequest(inputValue);
+
+        
     })
 }
 
@@ -30,11 +38,6 @@ const attachFormEventHandler = () => {
 
 
 
-async function main(){
-    const request = new FastAPIRequest("http://localhost:8000/lower/HELLO");
-    await request.fetchData()
-    console.log(request.data.text)
-}
 
 
 attachFormEventHandler();

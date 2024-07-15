@@ -1,6 +1,6 @@
 import spacy
 from spacy.tokens import Doc, Span
-from typing import List, Iterator
+from typing import List, Iterator, Dict
 from dataclasses import dataclass
 
 
@@ -10,11 +10,18 @@ class ProcessedDocument:
     tokens: List[str]
     pos_tags: List[str]
 
+    def to_json(self) -> Dict[str, str | List[str]]:
+        data = {
+            "text": self.original_text,
+            "tokens": self.tokens,
+            "pos_tags": self.pos_tags,
+        }
+        return data
 
-def spacyify(model: str, documents: List[str]) -> Iterator[Doc]:
+
+def spacyify(model: str, document: str) -> Doc:
     nlp = spacy.load(model)
-    pipe = nlp.pipe(documents)
-    return pipe
+    return nlp(document)
 
 
 def get_tokens(doc: Doc) -> List[str]:
@@ -29,5 +36,10 @@ def get_pos_tags(doc: Doc) -> List[str]:
 #     return [sent for sent in doc.sents]
 
 
-def process_document():
-    pass
+def process_document(document: str) -> ProcessedDocument:
+    doc = spacyify("en_core_web_sm", document)
+    tokens = get_tokens(doc)
+    pos = get_pos_tags(doc)
+    processed_doc = ProcessedDocument(doc.text, tokens, pos)
+
+    return processed_doc

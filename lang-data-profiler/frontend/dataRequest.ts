@@ -1,5 +1,7 @@
 interface DataResponse {
     text:string;
+    tokens: string[];
+    pos_tags: string[];
 }
 
 
@@ -19,7 +21,6 @@ export class FastAPIRequest {
               throw new Error(`Response status: ${response.status}`);
             }
             const json = await response.json();
-            console.log(json);
             this.data = json;
           } catch (error) {
                 console.log(error)
