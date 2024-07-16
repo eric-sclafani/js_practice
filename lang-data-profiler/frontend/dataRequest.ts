@@ -1,7 +1,8 @@
-interface DataResponse {
-    text:string;
-    tokens: string[];
-    pos_tags: string[];
+export interface DataResponse {
+    text:string
+    tokens: string[]
+    pos_tags: string[]
+    entities: string[]
 }
 
 

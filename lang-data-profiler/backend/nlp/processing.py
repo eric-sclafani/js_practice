@@ -9,12 +9,14 @@ class ProcessedDocument:
     original_text: str
     tokens: List[str]
     pos_tags: List[str]
+    entities: List[str]
 
     def to_json(self) -> Dict[str, str | List[str]]:
         data = {
             "text": self.original_text,
             "tokens": self.tokens,
             "pos_tags": self.pos_tags,
+            "entities": self.entities
         }
         return data
 
@@ -31,6 +33,10 @@ def get_tokens(doc: Doc) -> List[str]:
 def get_pos_tags(doc: Doc) -> List[str]:
     return [token.pos_ for token in doc]
 
+    
+def get_named_entities(doc: Doc) -> List[str]:
+    return [token.label_ for token in doc.ents]
+
 
 # def get_sentences(doc: Doc) -> List[Span]:
 #     return [sent for sent in doc.sents]
@@ -40,6 +46,7 @@ def process_document(document: str) -> ProcessedDocument:
     doc = spacyify("en_core_web_sm", document)
     tokens = get_tokens(doc)
     pos = get_pos_tags(doc)
-    processed_doc = ProcessedDocument(doc.text, tokens, pos)
+    entities = get_named_entities(doc)
+    processed_doc = ProcessedDocument(doc.text, tokens, pos, entities)
 
     return processed_doc
